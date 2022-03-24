@@ -27,7 +27,7 @@ public class JwtService implements TokenService {
         return Jwts.builder()
                 .setSubject(subject)
                 .setExpiration(expireTimeFromNow())
-                .signWith(SignatureAlgorithm.ES512, secret)
+                .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
     }
 
