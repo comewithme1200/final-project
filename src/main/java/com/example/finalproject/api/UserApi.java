@@ -25,7 +25,7 @@ public class UserApi {
     TokenService tokenService;
 
     @Autowired
-    public UserApi(UserService userService, EncryptSerivce encryptSerivce, TokenService tokenService) {
+    public UserApi(UserService userService) {
         this.userService = userService;
         this.encryptSerivce = encryptSerivce;
         this.tokenService = tokenService;
