@@ -1,12 +1,15 @@
 package com.example.finalproject.api;
 
-import com.example.finalproject.application.user.UserData;
-import com.example.finalproject.application.user.UserRegisterParam;
-import com.example.finalproject.application.user.UserService;
+import com.example.finalproject.api.exception.InvalidAuthenticationException;
+import com.example.finalproject.application.user.*;
+import com.example.finalproject.core.service.TokenService;
+import com.example.finalproject.core.user.EncryptSerivce;
+import com.example.finalproject.core.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -16,8 +19,16 @@ public class UserApi {
     UserService userService;
 
     @Autowired
-    public UserApi(UserService userService) {
+    EncryptSerivce encryptSerivce;
+
+    @Autowired
+    TokenService tokenService;
+
+    @Autowired
+    public UserApi(UserService userService, EncryptSerivce encryptSerivce, TokenService tokenService) {
         this.userService = userService;
+        this.encryptSerivce = encryptSerivce;
+        this.tokenService = tokenService;
     }
 
     @PostMapping(path = "/register")
@@ -25,5 +36,18 @@ public class UserApi {
         return userService.createUser(registerParam);
     }
 
+    @PostMapping(path = "/login")
+    public LoginResponse login(@Valid @RequestBody LoginParam loginParam) throws InvalidAuthenticationException {
+        Optional<User> user = userService.findByEmail(loginParam.getEmail());
+        if (user.isPresent() && encryptSerivce.checkPassword(loginParam.getPassword(),
+                user.get().getPassword())) {
+            String token = tokenService.generateToken(user.get().getId());
+            UserData userData = UserData.fromUser(user.get());
+            return new LoginResponse(token, userData);
+        }
+        else {
+            throw new InvalidAuthenticationException();
+        }
+    }
 
 }
