@@ -27,6 +27,8 @@ public class UserApi {
     @Autowired
     public UserApi(UserService userService) {
         this.userService = userService;
+        this.encryptSerivce = encryptSerivce;
+        this.tokenService = tokenService;
     }
 
     @PostMapping(path = "/register")
