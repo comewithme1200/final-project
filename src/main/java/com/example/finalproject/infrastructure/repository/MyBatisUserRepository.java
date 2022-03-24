@@ -17,12 +17,28 @@ public class MyBatisUserRepository implements UserRepository {
 
     @Override
     public void save(User user) {
-
+        userMapper.insert(user);
     }
 
     @Override
     public Optional<User> findById(String id) {
         User user = userMapper.findById(id);
+        if (user != null)
+            return Optional.of(user);
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<User> findByUsername(String username) {
+        User user = userMapper.findByUsername(username);
+        if (user != null)
+            return Optional.of(user);
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        User user = userMapper.findByEmail(email);
         if (user != null)
             return Optional.of(user);
         return Optional.empty();
