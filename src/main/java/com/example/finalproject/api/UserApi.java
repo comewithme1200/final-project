@@ -1,7 +1,7 @@
 package com.example.finalproject.api;
 
 import com.example.finalproject.api.exception.InvalidAuthenticationException;
-import com.example.finalproject.application.user.*;
+import com.example.finalproject.application.users.*;
 import com.example.finalproject.core.service.TokenService;
 import com.example.finalproject.core.user.EncryptSerivce;
 import com.example.finalproject.core.user.User;
@@ -25,7 +25,7 @@ public class UserApi {
     TokenService tokenService;
 
     @Autowired
-    public UserApi(UserService userService) {
+    public UserApi(UserService userService, EncryptSerivce encryptSerivce, TokenService tokenService) {
         this.userService = userService;
         this.encryptSerivce = encryptSerivce;
         this.tokenService = tokenService;

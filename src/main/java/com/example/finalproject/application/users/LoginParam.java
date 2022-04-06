@@ -1,16 +1,18 @@
-package com.example.finalproject.application.user;
+package com.example.finalproject.application.users;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRegisterParam {
+public class LoginParam {
     @NotBlank(message = "can't be empty")
     @Email(message = "should be an email")
-    @DuplicatedEmailConstraint
     private String email;
 
     @NotBlank(message = "can't be empty")

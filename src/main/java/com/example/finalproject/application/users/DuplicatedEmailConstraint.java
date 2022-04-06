@@ -1,14 +1,14 @@
-package com.example.finalproject.application.user;
+package com.example.finalproject.application.users;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-@Constraint(validatedBy = DuplicatedUsernameValidator.class)
+@Constraint(validatedBy = DuplicatedEmailValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
-@interface DuplicatedUsernameConstraint {
-  String message() default "duplicated username";
+public @interface DuplicatedEmailConstraint {
+  String message() default "duplicated email";
 
   Class<?>[] groups() default {};
 

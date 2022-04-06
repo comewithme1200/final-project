@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.finalproject.infrastructure.mybatis.mapper.RoomMapper">
+    <insert id="insert">
+        insert into rooms (id, cinema_id, room_name) values(
+        #{room.id},
+        #{room.cinema_id},
+        #{room.room_name}
+        )
+    </insert>
+</mapper>

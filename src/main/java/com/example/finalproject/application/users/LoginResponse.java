@@ -1,4 +1,4 @@
-package com.example.finalproject.application.user;
+package com.example.finalproject.application.users;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

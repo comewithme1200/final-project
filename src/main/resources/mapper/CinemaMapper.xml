@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.finalproject.infrastructure.mybatis.mapper.CinemasMapper">
+    <insert id="insert">
+        insert into cinemas (id, cinema_name, cinema_address) values(
+        #{cinema.id},
+        #{cinema.cinema_name},
+        #{cinema.cinema_address}
+        )
+    </insert>
+    <resultMap id="cinema" type="com.example.finalproject.core.cinemas.Cinemas" >
+    </resultMap>
+
+</mapper>
