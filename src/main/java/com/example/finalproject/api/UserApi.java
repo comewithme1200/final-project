@@ -31,6 +31,7 @@ public class UserApi {
         this.tokenService = tokenService;
     }
 
+
     @PostMapping(path = "/register")
     public UserData createUser(@Valid @RequestBody UserRegisterParam registerParam) {
         return userService.createUser(registerParam);

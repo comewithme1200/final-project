@@ -5,21 +5,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class PremiereInfo {
     private String id;
-    private Date startTime;
+    private Timestamp startTime;
+    private String movieId;
     private String roomId;
 
     public static PremiereInfo fromPremiere(Premiere premiere) {
+        Timestamp start_timestamp = Timestamp.valueOf(premiere.getStart_time());
         return new PremiereInfo(
             premiere.getId(),
-            premiere.getStartTime(),
-            premiere.getRoomId()
+            start_timestamp,
+            premiere.getMovie_id(),
+            premiere.getRoom_id()
         );
     }
 }

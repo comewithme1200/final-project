@@ -37,10 +37,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .antMatchers(HttpMethod.POST, "/users/register", "/users/login")
                 .permitAll()
-                .antMatchers(HttpMethod.GET, "/articles/**", "/profiles/**", "/tags", "/test")
+                .antMatchers(HttpMethod.GET, "/articles/**", "/profiles/**", "/tags", "/test", "/movies")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
+        http.cors();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }

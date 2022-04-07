@@ -1,12 +1,22 @@
 package com.example.finalproject.application.premiere;
 
+import com.example.finalproject.core.premiere.Premiere;
+import com.example.finalproject.core.premiere.PremiereRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PremiereService {
+
+    @Autowired
+    PremiereRepository premiereRepository;
+
     public PremiereInfo create(PremiereCreateParam premiereCreateParam) {
-        PremiereInfo premiereInfo = new PremiereInfo();
-        return premiereInfo;
+        Premiere premiere = new Premiere(premiereCreateParam.getStart_time(), premiereCreateParam.getEnd_time(),
+                premiereCreateParam.getMovie_id(), premiereCreateParam.getRoom_id());
+        premiereRepository.save(premiere);
+        return PremiereInfo.fromPremiere(premiere);
     }
+
 
 }

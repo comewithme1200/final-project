@@ -11,4 +11,15 @@
         #{movie.image_path}
         )
     </insert>
+    <select id="getMovies" resultMap="movies">
+        select * from movies
+    </select>
+    <resultMap id="movies" type="com.example.finalproject.core.movies.Movies" >
+        <id column="id" property="id"/>
+        <result column="movie_name" property="movie_name"/>
+        <result column="premiere_date" property="premiere_date"/>
+        <result column="detail" property="detail"/>
+        <result column="trailer_link" property="trailer_link"/>
+        <result column="image_path" property="image_path"/>
+    </resultMap>
 </mapper>

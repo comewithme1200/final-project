@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Service
@@ -22,5 +23,26 @@ public class MovieService {
                                     , movieCreateParam.getImage_path());
         moviesRepository.save(movies);
         return movies;
+    }
+
+
+    public MoviesList getMovies() {
+        ArrayList<Movies> moviesArrayList;
+        ArrayList<Movies> moviesAboutOnAir = new ArrayList<>();
+        ArrayList<Movies> moviesOnAir = new ArrayList<>();
+        moviesArrayList = moviesRepository.getMovies();
+
+        for (Movies movies : moviesArrayList) {
+            Date now = new Date();
+            if (movies.getPremiere_date().before(now) || movies.getPremiere_date().equals(now)) {
+                moviesOnAir.add(movies);
+            } else if (movies.getPremiere_date().after(now)) {
+                moviesAboutOnAir.add(movies);
+            }
+        }
+
+        MoviesList moviesList = new MoviesList(moviesAboutOnAir, moviesOnAir);
+
+        return moviesList;
     }
 }
