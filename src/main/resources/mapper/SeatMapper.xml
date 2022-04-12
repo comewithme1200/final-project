@@ -10,4 +10,23 @@
             #{seat.room_id}
         </foreach>
     </insert>
+
+    <select id="getSeats" resultMap="seatData">
+        select id, number, rows_alphabet, status from seats where room_id = #{roomId}
+    </select>
+
+    <select id="getSeatRow" resultMap="seatRowData">
+        select rows_alphabet from seats where room_id = #{roomId} group by rows_alphabet order by rows_alphabet asc;
+    </select>
+
+    <resultMap id="seatData" type="com.example.finalproject.application.seats.SeatData" >
+        <id column="id" property="id"/>
+        <result column="number" property="number"/>
+        <result column="rows_alphabet" property="rows_alphabet"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <resultMap id="seatRowData" type="com.example.finalproject.application.seats.SeatRow" >
+        <result column="rows_alphabet" property="rows_alphabet"/>
+    </resultMap>
 </mapper>

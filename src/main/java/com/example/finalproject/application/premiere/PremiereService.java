@@ -5,6 +5,8 @@ import com.example.finalproject.core.premiere.PremiereRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class PremiereService {
 
@@ -18,5 +20,12 @@ public class PremiereService {
         return PremiereInfo.fromPremiere(premiere);
     }
 
+    public ArrayList<Premiere> getAll() {
+        return premiereRepository.getAll();
+    }
+
+    public ArrayList<GetPremiereResponse> getPremiereList(String movie_id, String date) {
+        return premiereRepository.getPremiereList(movie_id, date);
+    }
 
 }
