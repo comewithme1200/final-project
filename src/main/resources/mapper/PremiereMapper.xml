@@ -10,4 +10,17 @@
         #{premiere.room_id}
         )
     </insert>
+
+    <select id="getAll" resultMap="premiere">
+        select * from premiere p;
+    </select>
+
+    <resultMap id="premiere" type="com.example.finalproject.core.premiere.Premiere" >
+        <id column="id" property="id"/>
+        <result column="start_time" property="start_time"/>
+        <result column="end_time" property="end_time"/>
+        <result column="movie_id" property="movie_id"/>
+        <result column="room_id" property="room_id"/>
+    </resultMap>
+
 </mapper>
