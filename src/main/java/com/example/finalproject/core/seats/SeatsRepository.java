@@ -13,4 +13,6 @@ public interface SeatsRepository {
     ArrayList<SeatData> getSeat(String roomId);
 
     ArrayList<SeatRow> getSeatRow(String roomId);
+
+    ArrayList<SeatOccupied> getSeatsPremiere(String premiere_id);
 }

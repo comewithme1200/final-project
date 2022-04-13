@@ -19,6 +19,12 @@
         select rows_alphabet from seats where room_id = #{roomId} group by rows_alphabet order by rows_alphabet asc;
     </select>
 
+    <select id="getSeatsPremiere" resultMap="seatOccupied">
+        SELECT seat_id, premiere_id, status
+        FROM seat_occupied AS so
+        WHERE so.premiere_id = #{premiereId}
+    </select>
+
     <resultMap id="seatData" type="com.example.finalproject.application.seats.SeatData" >
         <id column="id" property="id"/>
         <result column="number" property="number"/>
@@ -28,5 +34,10 @@
 
     <resultMap id="seatRowData" type="com.example.finalproject.application.seats.SeatRow" >
         <result column="rows_alphabet" property="rows_alphabet"/>
+    </resultMap>
+
+    <resultMap id="seatOccupied" type="com.example.finalproject.core.seats.SeatOccupied" autoMapping="true">
+        <result column="seat_id" property="seat_id"/>
+        <result column="premiere_id" property="premiere_id"/>
     </resultMap>
 </mapper>

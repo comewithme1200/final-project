@@ -1,5 +1,6 @@
 package com.example.finalproject.application.seats;
 
+import com.example.finalproject.core.seats.SeatOccupied;
 import com.example.finalproject.core.seats.SeatsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,5 +29,9 @@ public class SeatService {
         }
 
         return seatRowsArrayList;
+    }
+
+    public ArrayList<SeatOccupied> getSeatsPremiere(String premiere_id) {
+        return seatsRepository.getSeatsPremiere(premiere_id);
     }
 }

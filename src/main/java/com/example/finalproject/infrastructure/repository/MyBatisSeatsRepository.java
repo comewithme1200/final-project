@@ -4,6 +4,7 @@ import com.example.finalproject.application.seats.GetSeatParam;
 import com.example.finalproject.application.seats.SeatData;
 import com.example.finalproject.application.seats.SeatRow;
 import com.example.finalproject.application.seats.SeatRows;
+import com.example.finalproject.core.seats.SeatOccupied;
 import com.example.finalproject.core.seats.Seats;
 import com.example.finalproject.core.seats.SeatsRepository;
 import com.example.finalproject.infrastructure.mybatis.mapper.SeatsMapper;
@@ -32,5 +33,10 @@ public class MyBatisSeatsRepository implements SeatsRepository {
     @Override
     public ArrayList<SeatRow> getSeatRow(String roomId) {
         return seatsMapper.getSeatRow(roomId);
+    }
+
+    @Override
+    public ArrayList<SeatOccupied> getSeatsPremiere(String premiere_id) {
+        return seatsMapper.getSeatsPremiere(premiere_id);
     }
 }
