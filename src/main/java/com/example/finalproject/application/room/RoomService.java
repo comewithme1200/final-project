@@ -27,7 +27,7 @@ public class RoomService {
             char ch;
             for( ch = 'A' ; ch <= 'H' ; ch++ ) {
                 for (int i = 0; i < 15; i++) {
-                    Seats seat = new Seats(i+1, Character.toString(ch), room.getId(), "available");
+                    Seats seat = new Seats(i+1, Character.toString(ch), room.getId());
                     seatsArrayList.add(seat);
                 }
             }
@@ -36,7 +36,7 @@ public class RoomService {
             char ch;
             for( ch = 'A' ; ch <= 'H' ; ch++ ) {
                 for (int i = 0; i < 8; i++) {
-                    Seats seat = new Seats(i+1, Character.toString(ch), room.getId(), "available");
+                    Seats seat = new Seats(i+1, Character.toString(ch), room.getId());
                     seatsArrayList.add(seat);
                 }
             }

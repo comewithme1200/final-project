@@ -12,14 +12,12 @@ public class SeatData {
     private String id;
     private int number;
     private String rows_alphabet;
-    private String status;
 
     public static SeatData fromSeat(Seats seats) {
         return new SeatData(
           seats.getId(),
           seats.getNumber(),
-          seats.getRows_alphabet(),
-          seats.getStatus()
+          seats.getRows_alphabet()
         );
     }
 }
