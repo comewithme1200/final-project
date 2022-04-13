@@ -21,4 +21,8 @@ public interface SeatsMapper {
     ArrayList<SeatRow> getSeatRow(@Param("roomId") String roomId);
 
     ArrayList<SeatOccupied> getSeatsPremiere(@Param("premiereId") String premiereId);
+
+    boolean existsSeatOccupied(@Param("seatId") String seatId, @Param("premiereId") String premiereId);
+
+    void insertSeatOccupied(@Param("seatOccupiedList") List<SeatOccupied> seatOccupiedList);
 }
