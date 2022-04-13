@@ -39,4 +39,14 @@ public class MyBatisSeatsRepository implements SeatsRepository {
     public ArrayList<SeatOccupied> getSeatsPremiere(String premiere_id) {
         return seatsMapper.getSeatsPremiere(premiere_id);
     }
+
+    @Override
+    public boolean existsSeatOccupied(String seat_id, String premiere_id) {
+        return seatsMapper.existsSeatOccupied(seat_id, premiere_id);
+    }
+
+    @Override
+    public void insertSeatOccupied(List<SeatOccupied> seatOccupiedList) {
+        seatsMapper.insertSeatOccupied(seatOccupiedList);
+    }
 }

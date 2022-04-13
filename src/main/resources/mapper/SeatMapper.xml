@@ -25,6 +25,19 @@
         WHERE so.premiere_id = #{premiereId}
     </select>
 
+    <insert id="insertSeatOccupied" parameterType="java.util.List">
+        INSERT INTO seat_occupied (seat_id, premiere_id, status) VALUES
+        <foreach collection="seatOccupiedList" item="seatOccupied" index="index" open="(" separator="),("  close=")">
+            #{seatOccupied.seat_id},
+            #{seatOccupied.premiere_id},
+            #{seatOccupied.status}
+        </foreach>
+    </insert>
+
+    <select id="existsSeatOccupied" resultType="java.lang.Boolean">
+        SELECT EXISTS(SELECT status FROM seat_occupied WHERE seat_id = #{seatId} AND premiere_id = #{premiereId})
+    </select>
+
     <resultMap id="seatData" type="com.example.finalproject.application.seats.SeatData" >
         <id column="id" property="id"/>
         <result column="number" property="number"/>
