@@ -12,7 +12,7 @@
     </insert>
 
     <select id="getSeats" resultMap="seatData">
-        select id, number, rows_alphabet, status from seats where room_id = #{roomId}
+        select id, number, rows_alphabet from seats where room_id = #{roomId}
     </select>
 
     <select id="getSeatRow" resultMap="seatRowData">
@@ -29,7 +29,6 @@
         <id column="id" property="id"/>
         <result column="number" property="number"/>
         <result column="rows_alphabet" property="rows_alphabet"/>
-        <result column="status" property="status"/>
     </resultMap>
 
     <resultMap id="seatRowData" type="com.example.finalproject.application.seats.SeatRow" >

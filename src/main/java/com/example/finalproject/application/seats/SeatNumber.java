@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 public class SeatNumber {
     private String id;
     private int number;
-    private String status;
 }
