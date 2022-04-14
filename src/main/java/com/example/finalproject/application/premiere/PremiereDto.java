@@ -5,12 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
-import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
-public class PremiereResponseInfo {
-    private String room_name;
-    private List<PremiereDto> premiereDtos;
+@NoArgsConstructor
+@AllArgsConstructor
+public class PremiereDto {
+    private String id;
+    private ArrayList<String> start_times;
 }

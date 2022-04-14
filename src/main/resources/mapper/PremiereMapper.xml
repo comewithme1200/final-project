@@ -15,6 +15,28 @@
         select * from premiere p;
     </select>
 
+    <select id="getPremiereMovie" resultMap="setPremiereMovie">
+        SELECT c.cinema_name, r.room_name, p.id, p.start_time
+        FROM premiere p
+        LEFT JOIN movies m ON m.id = p.movie_id
+        LEFT JOIN rooms r ON r.id = p.room_id
+        LEFT JOIN cinemas c ON c.id = r.cinema_id
+        WHERE TO_CHAR(p.start_time, 'yyyy-mm-dd') = #{start_time} AND p.movie_id = #{movie_id}
+    </select>
+
+    <resultMap id="setPremiereMovie" type="com.example.finalproject.application.premiere.GetPremiereResponse" >
+        <id column="cinema_name" property="cinema_name"/>
+        <collection  property="premiereResponseInfos" column="room_name" ofType="com.example.finalproject.application.premiere.PremiereResponseInfo">
+            <id column="room_name" property="room_name"/>
+            <collection property="premiereDtos" column="id" ofType="com.example.finalproject.application.premiere.PremiereDto" >
+                <id column="id" property="id"/>
+                <collection property="start_times" column="start_time" ofType="java.lang.String" >
+                    <result column="start_time" property="start_time"></result>
+                </collection>
+            </collection>
+        </collection>
+    </resultMap>
+
     <resultMap id="premiere" type="com.example.finalproject.core.premiere.Premiere" >
         <id column="id" property="id"/>
         <result column="start_time" property="start_time"/>
