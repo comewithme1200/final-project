@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Repository
 public class MyBatisPremiereRepository implements PremiereRepository {
@@ -25,8 +27,13 @@ public class MyBatisPremiereRepository implements PremiereRepository {
         return premiereMapper.getAll();
     }
 
+//    @Override
+//    public ArrayList<GetPremiereResponse> getPremiereList(String movie_id, String date) {
+//        return premiereMapper.getPremiereList(movie_id, date);
+//    }
+
     @Override
-    public ArrayList<GetPremiereResponse> getPremiereList(String movie_id, String date) {
-        return premiereMapper.getPremiereList(movie_id, date);
+    public List<GetPremiereResponse> getPremiereMovie(String movie_id, String date) {
+        return premiereMapper.getPremiereMovie(movie_id, date);
     }
 }

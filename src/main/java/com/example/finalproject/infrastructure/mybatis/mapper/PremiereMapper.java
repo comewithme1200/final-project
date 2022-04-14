@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Mapper
 public interface PremiereMapper {
@@ -14,5 +16,5 @@ public interface PremiereMapper {
 
     ArrayList<Premiere> getAll();
 
-    ArrayList<GetPremiereResponse> getPremiereList(@Param("movie_id") String movie_id, @Param("date") String date);
+    List<GetPremiereResponse> getPremiereMovie(@Param("movie_id") String movie_id, @Param("start_time") String start_time);
 }

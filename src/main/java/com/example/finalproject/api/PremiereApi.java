@@ -1,14 +1,14 @@
 package com.example.finalproject.api;
 
-import com.example.finalproject.application.premiere.GetPremiereParam;
-import com.example.finalproject.application.premiere.PremiereCreateParam;
-import com.example.finalproject.application.premiere.PremiereInfo;
-import com.example.finalproject.application.premiere.PremiereService;
+import com.example.finalproject.application.premiere.*;
 import com.example.finalproject.core.premiere.Premiere;
+import com.example.finalproject.core.premiere.PremiereRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/premiere")
@@ -32,4 +32,8 @@ public class PremiereApi {
         return premiereService.getAll();
     }
 
+    @GetMapping("/movie")
+    public List<GetPremiereResponse> getPremiereOfMovie(@RequestParam String movie_id, @RequestParam String date) {
+        return premiereService.getPremiereMovie(movie_id, date);
+    }
 }
