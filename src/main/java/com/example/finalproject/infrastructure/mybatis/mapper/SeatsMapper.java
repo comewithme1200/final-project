@@ -1,8 +1,5 @@
 package com.example.finalproject.infrastructure.mybatis.mapper;
 
-import com.example.finalproject.application.seats.GetSeatParam;
-import com.example.finalproject.application.seats.SeatData;
-import com.example.finalproject.application.seats.SeatRow;
 import com.example.finalproject.application.seats.SeatRows;
 import com.example.finalproject.core.seats.SeatOccupied;
 import com.example.finalproject.core.seats.Seats;
@@ -16,13 +13,11 @@ import java.util.List;
 public interface SeatsMapper {
     void insert(@Param("seats") List<Seats> seatsList);
 
-    ArrayList<SeatData> getSeats(@Param("roomId") String roomId);
-
-    ArrayList<SeatRow> getSeatRow(@Param("roomId") String roomId);
-
     ArrayList<SeatOccupied> getSeatsPremiere(@Param("premiereId") String premiereId);
 
     boolean existsSeatOccupied(@Param("seatId") String seatId, @Param("premiereId") String premiereId);
 
     void insertSeatOccupied(@Param("seatOccupiedList") List<SeatOccupied> seatOccupiedList);
+
+    List<SeatRows> getSeatsStatus(@Param("roomId") String roomId, @Param("premiereId") String premiereId);
 }

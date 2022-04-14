@@ -17,15 +17,15 @@ public class SeatApi {
     @Autowired
     SeatService seatService;
 
-    @GetMapping("")
-    public ArrayList<SeatRows> getSeats(@RequestParam String room_id) {
-        return seatService.get(room_id);
+    @GetMapping("/status")
+    public List<SeatRows> getSeatsStatus(@RequestParam(required = true) String room_id, @RequestParam(required = true) String premiere_id) {
+        return seatService.get(room_id, premiere_id);
     }
 
-    @GetMapping("/status")
-    public ArrayList<SeatOccupied> getSeatsPremiere(@RequestParam String premiere_id) {
-        return seatService.getSeatsPremiere(premiere_id);
-    }
+//    @GetMapping("/status")
+//    public ArrayList<SeatOccupied> getSeatsPremiere(@RequestParam String premiere_id) {
+//        return seatService.getSeatsPremiere(premiere_id);
+//    }
 
     @PostMapping
     public List<SeatOccupied> insertSeatOccupied(@RequestBody List<SeatOccupied> seatOccupieds) throws NotFoundException {

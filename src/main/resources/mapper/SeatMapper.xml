@@ -11,14 +11,6 @@
         </foreach>
     </insert>
 
-    <select id="getSeats" resultMap="seatData">
-        select id, number, rows_alphabet from seats where room_id = #{roomId}
-    </select>
-
-    <select id="getSeatRow" resultMap="seatRowData">
-        select rows_alphabet from seats where room_id = #{roomId} group by rows_alphabet order by rows_alphabet asc;
-    </select>
-
     <select id="getSeatsPremiere" resultMap="seatOccupied">
         SELECT seat_id, premiere_id, status
         FROM seat_occupied AS so
@@ -38,14 +30,25 @@
         SELECT EXISTS(SELECT status FROM seat_occupied WHERE seat_id = #{seatId} AND premiere_id = #{premiereId})
     </select>
 
-    <resultMap id="seatData" type="com.example.finalproject.application.seats.SeatData" >
-        <id column="id" property="id"/>
-        <result column="number" property="number"/>
-        <result column="rows_alphabet" property="rows_alphabet"/>
-    </resultMap>
+    <select id="getSeatsStatus" resultMap="seatStatus">
+        SELECT s.id, s.number, s.rows_alphabet,
+            CASE
+                WHEN so.status IS NULL THEN 2
+                ELSE so.status
+            END
+        FROM seats s
+        LEFT JOIN seat_occupied so ON s.id = so.seat_id AND so.premiere_id = #{premiereId}
+        WHERE s.room_id = #{roomId}
+        ORDER BY s.rows_alphabet, s.number ASC
+    </select>
 
-    <resultMap id="seatRowData" type="com.example.finalproject.application.seats.SeatRow" >
-        <result column="rows_alphabet" property="rows_alphabet"/>
+    <resultMap id="seatStatus" type="com.example.finalproject.application.seats.SeatRows" >
+        <id column="rows_alphabet" property="rows_alphabet"/>
+        <collection  property="seatNumberArrayList" ofType="com.example.finalproject.application.seats.SeatNumber">
+            <id property="id" column="id" ></id>
+            <result column="number" property="number"/>
+            <result column="status" property="status"/>
+        </collection>
     </resultMap>
 
     <resultMap id="seatOccupied" type="com.example.finalproject.core.seats.SeatOccupied" autoMapping="true">
