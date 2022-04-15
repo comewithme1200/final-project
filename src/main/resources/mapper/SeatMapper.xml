@@ -11,6 +11,28 @@
         </foreach>
     </insert>
 
+    <update id="update" parameterType="java.util.List">
+        <foreach collection="seatOccupieds" item="seatOccupied" index="index" open="" close="" separator=";">
+            update seat_occupied
+            <set>
+                <if test="seatOccupied.status != ''">status = #{seatOccupied.status},</if>
+                <if test="seatOccupied.disable != ''">disable = #{seatOccupied.disable},</if>
+            </set>
+            where id = ${seatOccupied.id}
+        </foreach>
+    </update>
+
+    <update id="autoUpdateSeatOccupied">
+        update seat_occupied
+        set disabled = true
+        from (
+        select id
+        from premiere p
+        where NOW() > start_time and p.disabled is true
+        ) as tp
+        where tp.id = seat_occupied.premiere_id
+    </update>
+
     <select id="getSeatsPremiere" resultMap="seatOccupied">
         SELECT seat_id, premiere_id, status
         FROM seat_occupied AS so
@@ -18,11 +40,12 @@
     </select>
 
     <insert id="insertSeatOccupied" parameterType="java.util.List">
-        INSERT INTO seat_occupied (seat_id, premiere_id, status) VALUES
+        INSERT INTO seat_occupied (seat_id, premiere_id, status, disabled) VALUES
         <foreach collection="seatOccupiedList" item="seatOccupied" index="index" open="(" separator="),("  close=")">
             #{seatOccupied.seat_id},
             #{seatOccupied.premiere_id},
-            #{seatOccupied.status}
+            0,
+            false
         </foreach>
     </insert>
 

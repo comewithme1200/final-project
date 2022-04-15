@@ -36,4 +36,10 @@ public class MyBatisPremiereRepository implements PremiereRepository {
     public List<GetPremiereResponse> getPremiereMovie(String movie_id, String date) {
         return premiereMapper.getPremiereMovie(movie_id, date);
     }
+
+    @Override
+    public void autoUpdatePremiere() {
+        premiereMapper.autoUpdatePremiere();
+    }
+
 }

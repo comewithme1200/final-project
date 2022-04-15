@@ -8,4 +8,6 @@ public interface MoviesRepository {
     void save(Movies movies);
 
     ArrayList<Movies> getMovies();
+
+    Movies findById(String id);
 }

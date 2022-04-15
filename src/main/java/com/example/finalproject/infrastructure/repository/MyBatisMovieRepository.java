@@ -25,4 +25,9 @@ public class MyBatisMovieRepository implements MoviesRepository {
     public ArrayList<Movies> getMovies() {
         return moviesMapper.getMovies();
     }
+
+    @Override
+    public Movies findById(String id) {
+        return moviesMapper.findById(id);
+    }
 }

@@ -2,7 +2,6 @@ package com.example.finalproject.api;
 
 import com.example.finalproject.application.premiere.*;
 import com.example.finalproject.core.premiere.Premiere;
-import com.example.finalproject.core.premiere.PremiereRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

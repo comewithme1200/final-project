@@ -40,9 +40,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers(HttpMethod.GET, "/articles/feed")
                 .authenticated()
-                .antMatchers(HttpMethod.POST, "/users/register", "/users/login", "/seats/**")
+                .antMatchers(HttpMethod.POST, "/users/register", "/users/login", "/seats/**", "premiere/**")
                 .permitAll()
-                .antMatchers(HttpMethod.GET, "/articles/**", "/profiles/**", "/tags", "/seats/**", "/test", "/movies", "/premiere/**")
+                .antMatchers(HttpMethod.GET, "/articles/**", "/profiles/**", "/tags", "/seats/**", "/test", "/movies/**", "/premiere/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();

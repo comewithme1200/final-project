@@ -45,4 +45,8 @@ public class MovieService {
 
         return moviesList;
     }
+
+    public Movies getMovieById(String id) {
+        return moviesRepository.findById(id);
+    }
 }

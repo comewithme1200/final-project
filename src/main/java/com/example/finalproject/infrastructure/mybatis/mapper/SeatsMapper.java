@@ -20,4 +20,8 @@ public interface SeatsMapper {
     void insertSeatOccupied(@Param("seatOccupiedList") List<SeatOccupied> seatOccupiedList);
 
     List<SeatRows> getSeatsStatus(@Param("roomId") String roomId, @Param("premiereId") String premiereId);
+
+    void autoUpdateSeatOccupied();
+
+    void update(@Param("seats") List<SeatOccupied> seatOccupieds);
 }

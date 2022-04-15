@@ -11,4 +11,6 @@ public interface MoviesMapper {
     void insert(@Param("movie") Movies movies);
 
     ArrayList<Movies> getMovies();
+
+    Movies findById(@Param("id") String id);
 }

@@ -41,4 +41,14 @@ public class MyBatisSeatsRepository implements SeatsRepository {
     public List<SeatRows> getSeatsStatus(String roomId, String premiereId) {
         return seatsMapper.getSeatsStatus(roomId, premiereId);
     }
+
+    @Override
+    public void autoUpdateSeatOccupied() {
+        seatsMapper.autoUpdateSeatOccupied();
+    }
+
+    @Override
+    public void update(List<SeatOccupied> seatOccupieds) {
+        seatsMapper.update(seatOccupieds);
+    }
 }

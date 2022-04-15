@@ -46,4 +46,9 @@ public class SeatService {
         seatsRepository.insertSeatOccupied(result);
         return result;
     }
+
+    public String updateSeatOccupied(List<SeatOccupied> seatOccupieds) {
+        seatsRepository.update(seatOccupieds);
+        return "Success";
+    }
 }

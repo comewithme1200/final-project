@@ -17,4 +17,8 @@ public interface SeatsRepository {
     void insertSeatOccupied(@Param("seatOccupiedList") List<SeatOccupied> seatOccupiedList);
 
     List<SeatRows> getSeatsStatus(@Param("roomId") String roomId, @Param("premiereId") String premiereId);
+
+    void autoUpdateSeatOccupied();
+
+    void update(List<SeatOccupied> seatOccupieds);
 }

@@ -11,6 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class PremiereResponseInfo {
+    private String room_id;
     private String room_name;
     private List<PremiereDto> premiereDtos;
 }

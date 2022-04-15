@@ -26,4 +26,9 @@ public class MoviesApi {
         return movieService.getMovies();
     }
 
+    @GetMapping("/getMovieInfo")
+    public Movies getMovieById(@RequestParam String id) {
+        return movieService.getMovieById(id);
+    }
+
 }

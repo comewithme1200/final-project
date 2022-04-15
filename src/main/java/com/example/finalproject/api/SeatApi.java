@@ -29,7 +29,11 @@ public class SeatApi {
 
     @PostMapping
     public List<SeatOccupied> insertSeatOccupied(@RequestBody List<SeatOccupied> seatOccupieds) throws NotFoundException {
-
         return seatService.insertSeatOccupied(seatOccupieds);
+    }
+
+    @PutMapping
+    public String updateSeatOccupied(@RequestBody List<SeatOccupied> seatOccupieds) {
+        return seatService.updateSeatOccupied(seatOccupieds);
     }
 }
