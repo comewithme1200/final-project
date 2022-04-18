@@ -51,4 +51,9 @@ public class MyBatisSeatsRepository implements SeatsRepository {
     public void update(List<SeatOccupied> seatOccupieds) {
         seatsMapper.update(seatOccupieds);
     }
+
+    @Override
+    public void delete(List<SeatOccupied> seatOccupieds) {
+        seatsMapper.delete(seatOccupieds);
+    }
 }

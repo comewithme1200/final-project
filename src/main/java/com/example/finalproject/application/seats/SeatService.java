@@ -51,4 +51,9 @@ public class SeatService {
         seatsRepository.update(seatOccupieds);
         return "Success";
     }
+    public String  deleteSeatOccupied(List<SeatOccupied> seatOccupieds) {
+        seatsRepository.delete(seatOccupieds);
+        return "Success";
+    }
+
 }

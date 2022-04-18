@@ -16,4 +16,9 @@ public class CinemasService {
         cinemasRepository.save(cinema);
         return CinemaInfo.fromCinema(cinema);
     }
+
+    public CinemaInfo getCinemaByRoomId(String room_id) {
+        Cinemas cinema = cinemasRepository.getCinemaByRoomId(room_id);
+        return CinemaInfo.fromCinema(cinema);
+    }
 }

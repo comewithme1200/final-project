@@ -24,4 +24,6 @@ public interface SeatsMapper {
     void autoUpdateSeatOccupied();
 
     void update(@Param("seats") List<SeatOccupied> seatOccupieds);
+
+    void delete(@Param("seats") List<SeatOccupied> seatOccupieds);
 }

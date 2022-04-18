@@ -17,4 +17,9 @@ public class MyBatisCinemasRepository implements CinemasRepository {
     public void save(Cinemas cinemas) {
         cinemasMapper.insert(cinemas);
     }
+
+    @Override
+    public Cinemas getCinemaByRoomId(String room_id) {
+        return cinemasMapper.getCinemaByRoomId(room_id);
+    }
 }

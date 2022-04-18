@@ -12,15 +12,22 @@
     </insert>
 
     <update id="update" parameterType="java.util.List">
-        <foreach collection="seatOccupieds" item="seatOccupied" index="index" open="" close="" separator=";">
+        <foreach collection="seats" item="seatOccupied" index="index" open="" close="" separator=";">
             update seat_occupied
             <set>
                 <if test="seatOccupied.status != ''">status = #{seatOccupied.status},</if>
-                <if test="seatOccupied.disable != ''">disable = #{seatOccupied.disable},</if>
+                <if test="seatOccupied.disabled != ''">disabled = #{seatOccupied.disabled},</if>
             </set>
-            where id = ${seatOccupied.id}
+            where seat_id = #{seatOccupied.seat_id}
         </foreach>
     </update>
+
+    <delete id="delete">
+        <foreach collection="seats" item="seatOccupied" index="index" open="" close="" separator=";">
+            delete from seat_occupied
+            where seat_id = #{seatOccupied.seat_id}
+        </foreach>
+    </delete>
 
     <update id="autoUpdateSeatOccupied">
         update seat_occupied
@@ -60,7 +67,7 @@
                 ELSE so.status
             END
         FROM seats s
-        LEFT JOIN seat_occupied so ON s.id = so.seat_id AND so.premiere_id = #{premiereId}
+        LEFT JOIN seat_occupied so ON s.id = so.seat_id AND so.premiere_id = #{premiereId} AND disabled = false
         WHERE s.room_id = #{roomId}
         ORDER BY s.rows_alphabet, s.number ASC
     </select>

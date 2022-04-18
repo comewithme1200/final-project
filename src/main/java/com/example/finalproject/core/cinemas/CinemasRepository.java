@@ -4,4 +4,6 @@ import com.example.finalproject.application.cinemas.CinemaInfo;
 
 public interface CinemasRepository {
     void save(Cinemas cinemas);
+
+    Cinemas getCinemaByRoomId(String room_id);
 }

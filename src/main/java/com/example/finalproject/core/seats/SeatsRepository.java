@@ -21,4 +21,6 @@ public interface SeatsRepository {
     void autoUpdateSeatOccupied();
 
     void update(List<SeatOccupied> seatOccupieds);
+
+    void delete(List<SeatOccupied> seatOccupieds);
 }

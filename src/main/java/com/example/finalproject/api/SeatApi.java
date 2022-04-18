@@ -36,4 +36,9 @@ public class SeatApi {
     public String updateSeatOccupied(@RequestBody List<SeatOccupied> seatOccupieds) {
         return seatService.updateSeatOccupied(seatOccupieds);
     }
+
+    @DeleteMapping
+    public String deleteSeatOccupied(@RequestBody List<SeatOccupied> seatOccupieds) {
+        return seatService.deleteSeatOccupied(seatOccupieds);
+    }
 }

@@ -39,11 +39,11 @@
         <id column="cinema_name" property="cinema_name"/>
         <collection  property="premiereResponseInfos" column="room_name" ofType="com.example.finalproject.application.premiere.PremiereResponseInfo">
             <id column="room_name" property="room_name"/>
-            <result column="room_id" property="room_id"></result>
+            <result column="room_id" property="room_id"/>
             <collection property="premiereDtos" column="id" ofType="com.example.finalproject.application.premiere.PremiereDto" >
                 <id column="id" property="id"/>
                 <collection property="start_times" column="start_time" ofType="java.lang.String" >
-                    <result column="start_time" property="start_time"></result>
+                    <result column="start_time" property="start_time"/>
                 </collection>
             </collection>
         </collection>

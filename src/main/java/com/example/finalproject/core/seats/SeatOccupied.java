@@ -7,4 +7,5 @@ public class SeatOccupied {
     private String seat_id;
     private String premiere_id;
     private Integer status;
+    private boolean disabled;
 }

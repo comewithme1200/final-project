@@ -7,4 +7,6 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface CinemasMapper {
     void insert(@Param("cinema") Cinemas cinemas);
+
+    Cinemas getCinemaByRoomId(@Param("room_id") String room_id);
 }
