@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.finalproject.infrastructure.mybatis.mapper.InvoiceDetailMapper">
+    <insert id="save" parameterType="java.util.List">
+        insert into invoice_detail (id, invoice_id, seat_id, premiere_id, price) values
+        <foreach collection="invoiceDetails" item="invoiceDetail" index="index" open="(" separator="),("  close=")">
+            #{invoiceDetail.id},
+            #{invoiceDetail.invoice_id},
+            #{invoiceDetail.seat_id},
+            #{invoiceDetail.premiere_id},
+            #{invoiceDetail.price}
+        </foreach>
+    </insert>
+</mapper>

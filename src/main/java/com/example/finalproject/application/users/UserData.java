@@ -9,11 +9,15 @@ import lombok.Data;
 public class UserData {
     private String id;
     private String email;
+    private String name;
+    private String level;
 
     public static UserData fromUser(User user) {
         return new UserData(
             user.getId(),
-            user.getEmail()
+            user.getEmail(),
+            user.getName(),
+            user.getLevel()
         );
     }
 }
