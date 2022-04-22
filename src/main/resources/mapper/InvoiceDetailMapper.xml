@@ -11,4 +11,18 @@
             #{invoiceDetail.price}
         </foreach>
     </insert>
+
+    <delete id="deleteInvoiceAndRelevant">
+        DELETE FROM invoice_detail
+        WHERE invoice_id = #{id}
+    </delete>
+
+    <select id="getInvoiceAndRelevant" resultMap="invoiceDetail">
+        SELECT *
+        FROM invoice_detail
+        WHERE invoice_id = #{id}
+    </select>
+
+    <resultMap id="invoiceDetail" type="com.example.finalproject.core.invoiceDetail.InvoiceDetail" autoMapping="true">
+    </resultMap>
 </mapper>

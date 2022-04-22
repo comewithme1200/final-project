@@ -18,4 +18,14 @@ public class MyBatisInvoiceDetailRepository implements InvoiceDetailRepository {
     public void save(List<InvoiceDetail> invoiceDetailList) {
         invoiceDetailMapper.save(invoiceDetailList);
     }
+
+    @Override
+    public List<InvoiceDetail> getInvoiceAndRelevant(String invoice_id) {
+        return invoiceDetailMapper.getInvoiceAndRelevant(invoice_id);
+    }
+
+    @Override
+    public void deleteInvoiceAndRelevant(String invoice_id) {
+        invoiceDetailMapper.deleteInvoiceAndRelevant(invoice_id);
+    }
 }

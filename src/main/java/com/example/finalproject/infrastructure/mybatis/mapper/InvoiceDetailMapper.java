@@ -9,4 +9,8 @@ import java.util.List;
 @Mapper
 public interface InvoiceDetailMapper {
     void save(@Param("invoiceDetails") List<InvoiceDetail> invoiceDetailList);
+
+    List<InvoiceDetail> getInvoiceAndRelevant(@Param("id") String invoice_id);
+
+    void deleteInvoiceAndRelevant(@Param("id") String invoice_id);
 }

@@ -28,10 +28,9 @@ public class InvoiceService {
 
     public InvoiceResponse confirmTicket(InvoiceCreateParam invoiceCreateParam) {
         Optional<User> user = userRepository.findById(invoiceCreateParam.getUser_id());
-
-        InvoiceResponse invoiceResponse = new InvoiceResponse(user, invoiceCreateParam.getInvoiceDetailCreateParams());
         Invoice invoice = new Invoice(0, invoiceCreateParam.getUser_id());
         invoiceRepository.save(invoice);
+        InvoiceResponse invoiceResponse = new InvoiceResponse(user, invoice, invoiceCreateParam.getInvoiceDetailCreateParams());
         List<InvoiceDetail> invoiceDetailList = new ArrayList<>();
         for (InvoiceDetailCreateParam createParam :invoiceCreateParam.getInvoiceDetailCreateParams()) {
             InvoiceDetail invoiceDetail = new InvoiceDetail(invoice.getId(), createParam.getPremiere_id(), createParam.getSeat_id(), createParam.getPrice());
@@ -39,5 +38,29 @@ public class InvoiceService {
         }
         invoiceDetailRepository.save(invoiceDetailList);
         return invoiceResponse;
+    }
+
+    public InvoiceResponse getInvoiceAndRelevant(String invoice_id, String user_id) {
+        Optional<User> user = userRepository.findById(user_id);
+        Invoice invoice = invoiceRepository.getInvoiceAndRelevant(invoice_id);
+        List<InvoiceDetail> invoiceDetailList = invoiceDetailRepository.getInvoiceAndRelevant(invoice_id);
+        List<InvoiceDetailCreateParam> invoiceDetailCreateParams = new ArrayList<>();
+        for (InvoiceDetail invoiceDetail : invoiceDetailList) {
+            InvoiceDetailCreateParam invoiceDetailCreateParam = new InvoiceDetailCreateParam();
+            invoiceDetailCreateParams.add(invoiceDetailCreateParam.fromInvoiceDetail(invoiceDetail));
+        }
+        InvoiceResponse invoiceResponse = new InvoiceResponse(user, invoice, invoiceDetailCreateParams);
+        return invoiceResponse;
+    }
+
+    public String updateInvoiceStatus(InvoiceUpdateParam invoiceUpdateParam) {
+        invoiceRepository.updateInvoiceStatus(invoiceUpdateParam);
+        return "Success";
+    }
+
+    public String deleteInvoiceAndRelevant(String invoice_id) {
+        invoiceRepository.deleteInvoiceAndRelevant(invoice_id);
+        invoiceDetailRepository.deleteInvoiceAndRelevant(invoice_id);
+        return "Success";
     }
 }

@@ -7,4 +7,24 @@
             #{invoice.user_id},
             #{invoice.status})
     </insert>
+
+    <update id="updateInvoiceStatus">
+        UPDATE invoice
+        SET status = #{invoice.status}
+        WHERE id = #{invoice.id}
+    </update>
+
+    <delete id="deleteInvoiceAndRelevant">
+        DELETE FROM invoice
+        WHERE id = #{id}
+    </delete>
+
+    <select id="getInvoiceAndRelevant" resultMap="invoice">
+        SELECT *
+        FROM invoice
+        WHERE id = #{id}
+    </select>
+
+    <resultMap id="invoice" type="com.example.finalproject.core.invoice.Invoice" autoMapping="true">
+    </resultMap>
 </mapper>
