@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers(HttpMethod.PUT,"/seats" )
                 .permitAll()
-                .antMatchers(HttpMethod.DELETE,"/seats" )
+                .antMatchers(HttpMethod.DELETE,"/seats", "/invoice" )
                 .permitAll()
                 .anyRequest()
                 .authenticated();
