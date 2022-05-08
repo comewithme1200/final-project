@@ -14,7 +14,7 @@
         WHERE id = #{invoice.id}
     </update>
 
-    <delete id="deleteInvoiceAndRelevant">
+    <delete id="delete">
         DELETE FROM invoice
         WHERE id = #{id}
     </delete>

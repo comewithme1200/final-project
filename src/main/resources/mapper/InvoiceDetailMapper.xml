@@ -12,7 +12,7 @@
         </foreach>
     </insert>
 
-    <delete id="deleteInvoiceAndRelevant">
+    <delete id="delete">
         DELETE FROM invoice_detail
         WHERE invoice_id = #{id}
     </delete>

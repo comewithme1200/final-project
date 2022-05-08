@@ -12,5 +12,5 @@ public interface InvoiceDetailMapper {
 
     List<InvoiceDetail> getInvoiceAndRelevant(@Param("id") String invoice_id);
 
-    void deleteInvoiceAndRelevant(@Param("id") String invoice_id);
+    void delete(@Param("id") String invoice_id);
 }

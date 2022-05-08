@@ -13,5 +13,5 @@ public interface InvoiceMapper {
 
     void  updateInvoiceStatus(@Param("invoice") InvoiceUpdateParam invoiceUpdateParam);
 
-    void deleteInvoiceAndRelevant(@Param("id") String invoice_id);
+    void delete(@Param("id") String invoice_id);
 }

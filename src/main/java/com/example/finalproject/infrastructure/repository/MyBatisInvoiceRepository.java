@@ -30,6 +30,6 @@ public class MyBatisInvoiceRepository implements InvoiceRepository {
 
     @Override
     public void deleteInvoiceAndRelevant(String invoice_id) {
-        invoiceMapper.deleteInvoiceAndRelevant(invoice_id);
+        invoiceMapper.delete(invoice_id);
     }
 }

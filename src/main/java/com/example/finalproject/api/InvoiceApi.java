@@ -31,6 +31,9 @@ public class InvoiceApi {
 
     @DeleteMapping
     public String deleteInvoiceAndRelevant(@RequestBody String invoice_id) {
-        return invoiceService.deleteInvoiceAndRelevant(invoice_id);
+        StringBuffer sb = new StringBuffer(invoice_id);
+        sb.delete(invoice_id.length() - 1, invoice_id.length());
+        sb.delete(0, 1);
+        return invoiceService.deleteInvoiceAndRelevant(sb.toString());
     }
 }

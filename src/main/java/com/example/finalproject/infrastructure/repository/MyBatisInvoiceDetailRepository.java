@@ -26,6 +26,6 @@ public class MyBatisInvoiceDetailRepository implements InvoiceDetailRepository {
 
     @Override
     public void deleteInvoiceAndRelevant(String invoice_id) {
-        invoiceDetailMapper.deleteInvoiceAndRelevant(invoice_id);
+        invoiceDetailMapper.delete(invoice_id);
     }
 }
