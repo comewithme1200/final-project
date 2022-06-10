@@ -21,11 +21,6 @@ public class PremiereApi {
         return premiereService.create(premiereCreateParam);
     }
 
-//    @GetMapping()
-//    public ArrayList<Premiere> getPremiereList(@RequestParam String movie_id, @RequestParam String date) {
-//        return premiereService.getPremiereList(movie_id, date);
-//    }
-
     @GetMapping()
     public ArrayList<Premiere> getAllPremiere() {
         return premiereService.getAll();

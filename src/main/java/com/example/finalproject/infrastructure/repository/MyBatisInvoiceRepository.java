@@ -7,6 +7,8 @@ import com.example.finalproject.infrastructure.mybatis.mapper.InvoiceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class MyBatisInvoiceRepository implements InvoiceRepository {
 
@@ -21,6 +23,11 @@ public class MyBatisInvoiceRepository implements InvoiceRepository {
     @Override
     public Invoice getInvoiceAndRelevant(String invoice_id) {
         return invoiceMapper.getInvoiceAndRelevant(invoice_id);
+    }
+
+    @Override
+    public List<Invoice> getInvoiceByUser(String user_id) {
+        return invoiceMapper.getInvoiceByUser(user_id);
     }
 
     @Override

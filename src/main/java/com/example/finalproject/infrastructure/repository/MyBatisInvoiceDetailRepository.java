@@ -20,6 +20,11 @@ public class MyBatisInvoiceDetailRepository implements InvoiceDetailRepository {
     }
 
     @Override
+    public int getTotalMoneyByInvoiceId(String invoice_id) {
+        return invoiceDetailMapper.getTotalMoneyByInvoiceId(invoice_id);
+    }
+
+    @Override
     public List<InvoiceDetail> getInvoiceAndRelevant(String invoice_id) {
         return invoiceDetailMapper.getInvoiceAndRelevant(invoice_id);
     }

@@ -3,6 +3,7 @@ package com.example.finalproject.core.user;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -14,10 +15,10 @@ public class User {
     private String name;
     private String level;
     private String phoneNumber;
-    private String dob;
+    private Date dob;
     private String address;
 
-    public User(String email, String password, String name, String level, String phoneNumber, String dob,
+    public User(String email, String password, String name, String level, String phoneNumber, Date dob,
                 String address) {
         this.id = UUID.randomUUID().toString();
         this.email = email;
@@ -29,9 +30,13 @@ public class User {
         this.address = address;
     }
 
-    public User(String email, String password) {
+    public User(String email, String password, String name, String phoneNumber, Date dob, String address) {
         this.id = UUID.randomUUID().toString();
         this.email = email;
         this.password = password;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.dob = dob;
+        this.address = address;
     }
 }

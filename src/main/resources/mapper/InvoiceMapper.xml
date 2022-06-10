@@ -2,10 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.finalproject.infrastructure.mybatis.mapper.InvoiceMapper">
     <insert id="save">
-        insert into invoice (id, user_id, status) values(
+        insert into invoice (id, user_id, status, created_date) values(
             #{invoice.id},
             #{invoice.user_id},
-            #{invoice.status})
+            #{invoice.status},
+            #{invoice.created_date})
     </insert>
 
     <update id="updateInvoiceStatus">
@@ -25,6 +26,18 @@
         WHERE id = #{id}
     </select>
 
-    <resultMap id="invoice" type="com.example.finalproject.core.invoice.Invoice" autoMapping="true">
+    <select id="getInvoiceByUser" resultMap="invoice">
+        SELECT *
+        FROM invoice
+        WHERE user_id = #{user_id}
+        AND status = 1
+        ORDER BY created_date DESC
+    </select>
+
+    <resultMap id="invoice" type="com.example.finalproject.core.invoice.Invoice">
+        <id column="id" property="id"/>
+        <result column="user_id" property="user_id"/>
+        <result column="status" property="status"/>
+        <result column="created_date" property="created_date"/>
     </resultMap>
 </mapper>

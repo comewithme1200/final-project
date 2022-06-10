@@ -23,6 +23,16 @@
         WHERE invoice_id = #{id}
     </select>
 
-    <resultMap id="invoiceDetail" type="com.example.finalproject.core.invoiceDetail.InvoiceDetail" autoMapping="true">
+    <select id="getTotalMoneyByInvoiceId" resultType="java.lang.Integer">
+        select sum(id.price) from invoice_detail id
+        where id.invoice_id = #{id}
+    </select>
+
+    <resultMap id="invoiceDetail" type="com.example.finalproject.core.invoiceDetail.InvoiceDetail">
+        <id column="id" property="id"/>
+        <result column="invoice_id" property="invoice_id"/>
+        <result column="premiere_id" property="premiere_id"/>
+        <result column="seat_id" property="seat_id"/>
+        <result column="price" property="price"/>
     </resultMap>
 </mapper>

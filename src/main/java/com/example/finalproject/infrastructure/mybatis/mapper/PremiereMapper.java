@@ -16,6 +16,8 @@ public interface PremiereMapper {
 
     ArrayList<Premiere> getAll();
 
+    Premiere getPremiereById(@Param("id") String premiere_id);
+
     List<GetPremiereResponse> getPremiereMovie(@Param("movie_id") String movie_id, @Param("start_time") String start_time);
 
     void autoUpdatePremiere();

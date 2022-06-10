@@ -1,11 +1,14 @@
 package com.example.finalproject.api;
 
-import com.example.finalproject.application.invoice.InvoiceCreateParam;
-import com.example.finalproject.application.invoice.InvoiceResponse;
-import com.example.finalproject.application.invoice.InvoiceService;
-import com.example.finalproject.application.invoice.InvoiceUpdateParam;
+import com.example.finalproject.application.invoice.*;
+import com.example.finalproject.application.invoiceDetail.TicketInfo;
+import com.example.finalproject.core.invoiceDetail.InvoiceDetail;
+import com.example.finalproject.core.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/invoice")
@@ -22,6 +25,16 @@ public class InvoiceApi {
     @GetMapping
     public InvoiceResponse getInvoiceAndRelevant(@RequestBody String invoice_id, String user_id) {
         return invoiceService.getInvoiceAndRelevant(invoice_id, user_id);
+    }
+
+    @GetMapping("/history")
+    public List<InvoiceHistory> getBuyHistoryOfUser(@AuthenticationPrincipal User user) {
+        return invoiceService.getBuyHistory(user);
+    }
+
+    @GetMapping("/getTicket")
+    public List<TicketInfo> getTicket(@RequestParam String invoice_id) {
+        return invoiceService.getTicket(invoice_id);
     }
 
     @PutMapping

@@ -11,6 +11,8 @@ public interface PremiereRepository {
 
     ArrayList<Premiere> getAll();
 
+    Premiere getPremiereById(String premiere_id);
+
     List<GetPremiereResponse> getPremiereMovie(String movie_id, String date);
 
     void autoUpdatePremiere();

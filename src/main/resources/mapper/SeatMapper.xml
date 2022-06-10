@@ -2,12 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.finalproject.infrastructure.mybatis.mapper.SeatsMapper">
     <insert id="insert" parameterType="java.util.List">
-        insert into seats (id, number, rows_alphabet, room_id) values
+        insert into seats (id, number, rows_alphabet, room_id, type) values
         <foreach collection="seats" item="seat" index="index" open="(" separator="),("  close=")">
             #{seat.id},
             #{seat.number},
             #{seat.rows_alphabet},
-            #{seat.room_id}
+            #{seat.room_id},
+            #{seat.type}
         </foreach>
     </insert>
 
@@ -61,7 +62,7 @@
     </select>
 
     <select id="getSeatsStatus" resultMap="seatStatus">
-        SELECT s.id, s.number, s.rows_alphabet,
+        SELECT s.id, s.number, s.rows_alphabet, s.type,
             CASE
                 WHEN so.status IS NULL THEN 2
                 ELSE so.status
@@ -72,17 +73,34 @@
         ORDER BY s.rows_alphabet, s.number ASC
     </select>
 
+    <select id="getSeatNameById" resultMap="seat">
+        SELECT * FROM seats where id = #{id}
+    </select>
+
+    <select id="getNumberOfSeatOccupied" resultType="java.lang.Integer">
+        select count(type) from seat_occupied so join seats s on so.seat_id = s.id
+        where premiere_id = #{premiereId}
+        group by s."type"
+    </select>
+
     <resultMap id="seatStatus" type="com.example.finalproject.application.seats.SeatRows" >
         <id column="rows_alphabet" property="rows_alphabet"/>
         <collection  property="seatNumberArrayList" ofType="com.example.finalproject.application.seats.SeatNumber">
-            <id property="id" column="id" ></id>
+            <id property="id" column="id"/>
             <result column="number" property="number"/>
             <result column="status" property="status"/>
+            <result column="type" property="type"/>
         </collection>
     </resultMap>
 
     <resultMap id="seatOccupied" type="com.example.finalproject.core.seats.SeatOccupied" autoMapping="true">
         <result column="seat_id" property="seat_id"/>
         <result column="premiere_id" property="premiere_id"/>
+    </resultMap>
+
+    <resultMap id="seat" type="com.example.finalproject.core.seats.Seats" autoMapping="true">
+        <result column="id" property="id"/>
+        <result column="number" property="number"/>
+        <result column="rows_alphabet" property="rows_alphabet"/>
     </resultMap>
 </mapper>

@@ -1,5 +1,6 @@
 package com.example.finalproject.infrastructure.repository;
 
+import com.example.finalproject.application.room.RoomInfo;
 import com.example.finalproject.application.seats.SeatRows;
 import com.example.finalproject.core.seats.SeatOccupied;
 import com.example.finalproject.core.seats.Seats;
@@ -28,6 +29,11 @@ public class MyBatisSeatsRepository implements SeatsRepository {
     }
 
     @Override
+    public List<Integer> getNumberOfSeatOccupied(String premiere_id) {
+        return seatsMapper.getNumberOfSeatOccupied(premiere_id);
+    }
+
+    @Override
     public boolean existsSeatOccupied(String seat_id, String premiere_id) {
         return seatsMapper.existsSeatOccupied(seat_id, premiere_id);
     }
@@ -35,6 +41,11 @@ public class MyBatisSeatsRepository implements SeatsRepository {
     @Override
     public void insertSeatOccupied(List<SeatOccupied> seatOccupiedList) {
         seatsMapper.insertSeatOccupied(seatOccupiedList);
+    }
+
+    @Override
+    public Seats getSeatNameById(String seat_id) {
+        return seatsMapper.getSeatNameById(seat_id);
     }
 
     @Override

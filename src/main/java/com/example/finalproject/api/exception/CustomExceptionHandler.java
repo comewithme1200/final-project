@@ -48,6 +48,18 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
                         });
     }
 
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<Object> handleNotFoundException(
+            NotFoundException e, WebRequest request) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(
+                        new HashMap<String, Object>() {
+                            {
+                                put("message", e.getMessage());
+                            }
+                        });
+    }
+
     private String getParam(String s) {
         System.out.println("=====>"+s);
         String[] splits = s.split("\\.");

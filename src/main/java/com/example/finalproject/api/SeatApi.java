@@ -1,6 +1,7 @@
 package com.example.finalproject.api;
 
 import com.example.finalproject.api.exception.NotFoundException;
+import com.example.finalproject.application.seats.SeatLeftResponse;
 import com.example.finalproject.application.seats.SeatRows;
 import com.example.finalproject.application.seats.SeatService;
 import com.example.finalproject.core.seats.SeatOccupied;
@@ -22,11 +23,6 @@ public class SeatApi {
         return seatService.get(room_id, premiere_id);
     }
 
-//    @GetMapping("/status")
-//    public ArrayList<SeatOccupied> getSeatsPremiere(@RequestParam String premiere_id) {
-//        return seatService.getSeatsPremiere(premiere_id);
-//    }
-
     @PostMapping
     public List<SeatOccupied> insertSeatOccupied(@RequestBody List<SeatOccupied> seatOccupieds) throws NotFoundException {
         return seatService.insertSeatOccupied(seatOccupieds);
@@ -40,5 +36,10 @@ public class SeatApi {
     @DeleteMapping
     public String deleteSeatOccupied(@RequestBody List<SeatOccupied> seatOccupieds) {
         return seatService.deleteSeatOccupied(seatOccupieds);
+    }
+
+    @GetMapping(path = "/seatLeft")
+    public SeatLeftResponse getNumberSeatNotOccupied(@RequestParam String room_id, @RequestParam String premiere_id) {
+        return seatService.getNumberSeatNotOccupied(room_id, premiere_id);
     }
 }

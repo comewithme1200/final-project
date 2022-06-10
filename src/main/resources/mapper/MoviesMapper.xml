@@ -26,5 +26,6 @@
         <result column="detail" property="detail"/>
         <result column="trailer_link" property="trailer_link"/>
         <result column="image_path" property="image_path"/>
+        <result column="duration" property="time"/>
     </resultMap>
 </mapper>

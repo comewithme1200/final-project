@@ -26,13 +26,19 @@
         select * from premiere p;
     </select>
 
+    <select id="getPremiereById" resultMap="premiere">
+        select * from premiere
+        where id = #{id}
+    </select>
+
     <select id="getPremiereMovie" resultMap="setPremiereMovie">
         SELECT c.cinema_name, r.room_name, p.id, p.start_time, r.id AS room_id
         FROM premiere p
         LEFT JOIN movies m ON m.id = p.movie_id
         LEFT JOIN rooms r ON r.id = p.room_id
         LEFT JOIN cinemas c ON c.id = r.cinema_id
-        WHERE TO_CHAR(p.start_time, 'yyyy-mm-dd') = #{start_time} AND p.movie_id = #{movie_id}
+        WHERE #{start_time} = TO_CHAR(p.start_time, 'yyyy-mm-dd') AND p.movie_id = #{movie_id}
+        ORDER BY p.start_time ASC
     </select>
 
     <resultMap id="setPremiereMovie" type="com.example.finalproject.application.premiere.GetPremiereResponse" >

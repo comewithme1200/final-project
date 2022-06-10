@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class RoomCreateParam {
     private String cinema_id;
     private String room_name;
+    private String room_type;
 }

@@ -4,12 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class SeatNumber {
-    private String id;
-    private int number;
-    private int status;
-    private String type;
+public class SeatLeftResponse {
+    private int vip_left;
+    private int standard_left;
 }

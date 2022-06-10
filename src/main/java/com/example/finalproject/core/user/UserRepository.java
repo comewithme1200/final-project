@@ -11,4 +11,5 @@ public interface UserRepository {
 
      Optional<User> findByEmail(String email);
 
+     void updateLevel(String level, String user_id);
 }

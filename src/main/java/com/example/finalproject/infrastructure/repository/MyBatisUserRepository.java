@@ -43,4 +43,9 @@ public class MyBatisUserRepository implements UserRepository {
             return Optional.of(user);
         return Optional.empty();
     }
+
+    @Override
+    public void updateLevel(String level, String user_id) {
+        userMapper.updateLevel(level, user_id);
+    }
 }

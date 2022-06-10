@@ -2,12 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.finalproject.infrastructure.mybatis.mapper.UserMapper">
   <insert id="insert">
-    insert into users (id, email, password) values(
+    insert into users (id, email, password, name, phone_number, dob, address) values(
     #{user.id},
     #{user.email},
-    #{user.password}
+    #{user.password},
+    #{user.name},
+    #{user.phoneNumber},
+    #{user.dob},
+    #{user.address}
     )
   </insert>
+  <update id="updateLevel">
+    update users set level = #{level} where id = #{user_id}
+  </update>
   <select id="findById" resultMap="user">
     select * from users where id = #{id}
   </select>
@@ -22,7 +29,7 @@
     <result column="email" property="email"/>
     <result column="password" property="password"/>
     <result column="name" property="name"/>
-    <result column="level_id" property="level"/>
+    <result column="level" property="level"/>
     <result column="phone_number" property="phoneNumber"/>
     <result column="dob" property="dob"/>
     <result column="address" property="address"/>

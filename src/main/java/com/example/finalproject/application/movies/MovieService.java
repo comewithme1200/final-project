@@ -20,7 +20,8 @@ public class MovieService {
                                     , movieCreateParam.getPremiere_date()
                                     , movieCreateParam.getDetail()
                                     , movieCreateParam.getTrailer_link()
-                                    , movieCreateParam.getImage_path());
+                                    , movieCreateParam.getImage_path()
+                                    , movieCreateParam.getTime());
         moviesRepository.save(movies);
         return movies;
     }

@@ -2,10 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.finalproject.infrastructure.mybatis.mapper.RoomMapper">
     <insert id="insert">
-        insert into rooms (id, cinema_id, room_name) values(
+        insert into rooms (id, cinema_id, room_name, room_type) values(
         #{room.id},
         #{room.cinema_id},
-        #{room.room_name}
+        #{room.room_name},
+        #{room.room_type}
         )
     </insert>
+
+    <select id="getAll" resultMap="roomInfo">
+        SELECT id, room_name, cinema_id FROM rooms
+    </select>
+
+    <select id="findRoomById" resultMap="roomInfo">
+        SELECT * FROM rooms where id = #{id}
+    </select>
+
+    <resultMap id="roomInfo" type="com.example.finalproject.application.room.RoomInfo">
+        <result column="id" property="id"/>
+        <result column="room_name" property="room_name"/>
+        <result column="cinema_id" property="cinema_id"/>
+        <result column="room_type" property="room_type"/>
+    </resultMap>
+
 </mapper>

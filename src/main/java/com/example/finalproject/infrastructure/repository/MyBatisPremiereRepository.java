@@ -27,10 +27,10 @@ public class MyBatisPremiereRepository implements PremiereRepository {
         return premiereMapper.getAll();
     }
 
-//    @Override
-//    public ArrayList<GetPremiereResponse> getPremiereList(String movie_id, String date) {
-//        return premiereMapper.getPremiereList(movie_id, date);
-//    }
+    @Override
+    public Premiere getPremiereById(String premiere_id) {
+        return premiereMapper.getPremiereById(premiere_id);
+    }
 
     @Override
     public List<GetPremiereResponse> getPremiereMovie(String movie_id, String date) {

@@ -6,6 +6,7 @@ import com.example.finalproject.core.service.TokenService;
 import com.example.finalproject.core.user.EncryptSerivce;
 import com.example.finalproject.core.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -37,6 +38,11 @@ public class UserApi {
         return userService.createUser(registerParam);
     }
 
+    @GetMapping
+    public User getUserByToken(@AuthenticationPrincipal User user) {
+        return user;
+    }
+
     @PostMapping(path = "/login")
     public LoginResponse login(@Valid @RequestBody LoginParam loginParam) throws InvalidAuthenticationException {
         Optional<User> user = userService.findByEmail(loginParam.getEmail());
@@ -49,6 +55,11 @@ public class UserApi {
         else {
             throw new InvalidAuthenticationException();
         }
+    }
+
+    @PutMapping(path = "/updateLevel")
+    public Optional<User> updateLevel(@AuthenticationPrincipal User user) {
+        return userService.updateLevel(user);
     }
 
 }
