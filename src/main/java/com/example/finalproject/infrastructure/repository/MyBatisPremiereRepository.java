@@ -1,6 +1,7 @@
 package com.example.finalproject.infrastructure.repository;
 
 import com.example.finalproject.application.premiere.GetPremiereResponse;
+import com.example.finalproject.application.premiere.PremiereFullInfo;
 import com.example.finalproject.core.premiere.Premiere;
 import com.example.finalproject.core.premiere.PremiereRepository;
 import com.example.finalproject.infrastructure.mybatis.mapper.PremiereMapper;
@@ -40,6 +41,11 @@ public class MyBatisPremiereRepository implements PremiereRepository {
     @Override
     public void autoUpdatePremiere() {
         premiereMapper.autoUpdatePremiere();
+    }
+
+    @Override
+    public List<PremiereFullInfo> getInfo() {
+        return premiereMapper.getInfo();
     }
 
 }

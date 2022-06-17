@@ -2,12 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.finalproject.infrastructure.mybatis.mapper.PremiereMapper">
     <insert id="insert">
-        insert into premiere (id, start_time, end_time, movie_id, room_id) values(
+        insert into premiere (id, start_time, end_time, movie_id, room_id, disabled) values(
         #{premiere.id},
         #{premiere.start_time},
         #{premiere.end_time},
         #{premiere.movie_id},
-        #{premiere.room_id}
+        #{premiere.room_id},
+        false
         )
     </insert>
 
@@ -29,6 +30,12 @@
     <select id="getPremiereById" resultMap="premiere">
         select * from premiere
         where id = #{id}
+    </select>
+
+    <select id="getInfo" resultMap="premiereFullInfo">
+        SELECT p.id, p.start_time, p.end_time, m.movie_name, r.room_name, c.cinema_name, r.id as room_id
+        FROM premiere p JOIN movies m ON m.id = p.movie_id JOIN rooms r ON r.id = p.room_id JOIN cinemas c ON c.id = r.cinema_id
+        ORDER BY p.end_time
     </select>
 
     <select id="getPremiereMovie" resultMap="setPremiereMovie">
@@ -61,6 +68,17 @@
         <result column="end_time" property="end_time"/>
         <result column="movie_id" property="movie_id"/>
         <result column="room_id" property="room_id"/>
+    </resultMap>
+
+    <resultMap id="premiereFullInfo" type="com.example.finalproject.application.premiere.PremiereFullInfo" >
+        <id column="id" property="id"/>
+        <result column="start_time" property="start_time"/>
+        <result column="end_time" property="end_time"/>
+        <result column="movie_name" property="movie_name"/>
+        <result column="room_name" property="room_name"/>
+        <result column="room_id" property="room_id"/>
+        <result column="cinema_name" property="cinema_name"/>
+        <result column="disabled" property="disabled"/>
     </resultMap>
 
 </mapper>

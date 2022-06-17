@@ -2,6 +2,7 @@ package com.example.finalproject.infrastructure.mybatis.mapper;
 
 import com.example.finalproject.application.premiere.GetPremiereParam;
 import com.example.finalproject.application.premiere.GetPremiereResponse;
+import com.example.finalproject.application.premiere.PremiereFullInfo;
 import com.example.finalproject.core.premiere.Premiere;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -21,4 +22,6 @@ public interface PremiereMapper {
     List<GetPremiereResponse> getPremiereMovie(@Param("movie_id") String movie_id, @Param("start_time") String start_time);
 
     void autoUpdatePremiere();
+
+    List<PremiereFullInfo> getInfo();
 }

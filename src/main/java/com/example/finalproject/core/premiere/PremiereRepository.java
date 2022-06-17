@@ -1,6 +1,7 @@
 package com.example.finalproject.core.premiere;
 
 import com.example.finalproject.application.premiere.GetPremiereResponse;
+import com.example.finalproject.application.premiere.PremiereFullInfo;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,4 +17,6 @@ public interface PremiereRepository {
     List<GetPremiereResponse> getPremiereMovie(String movie_id, String date);
 
     void autoUpdatePremiere();
+
+    List<PremiereFullInfo> getInfo();
 }

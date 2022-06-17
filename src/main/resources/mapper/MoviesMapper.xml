@@ -2,21 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.finalproject.infrastructure.mybatis.mapper.MoviesMapper">
     <insert id="insert">
-        insert into movies (id, movie_name, premiere_date, detail, trailer_link, image_path) values(
+        insert into movies (id, movie_name, premiere_date, detail, trailer_link, image_path, image_id) values(
         #{movie.id},
         #{movie.movie_name},
         #{movie.premiere_date},
         #{movie.detail},
         #{movie.trailer_link},
-        #{movie.image_path}
+        #{movie.image_path},
+        #{movie.image_id}
         )
     </insert>
+
     <select id="getMovies" resultMap="movies">
         select * from movies
     </select>
 
     <select id="findById" resultMap="movies">
         select * from movies where id = #{id}
+    </select>
+
+    <select id="findByName" resultMap="movies">
+        select * from movies where movie_name = #{name}
+    </select>
+
+    <select id="getAll" resultMap="movies">
+        select * from movies
+    </select>
+
+    <select id="filter" resultMap="movies">
+        select * from movies m where m.movie_name ILIKE #{query} or m.detail ILIKE #{query}
     </select>
 
     <resultMap id="movies" type="com.example.finalproject.core.movies.Movies" >
@@ -27,5 +41,6 @@
         <result column="trailer_link" property="trailer_link"/>
         <result column="image_path" property="image_path"/>
         <result column="duration" property="time"/>
+        <result column="image_id" property="image_id"/>
     </resultMap>
 </mapper>

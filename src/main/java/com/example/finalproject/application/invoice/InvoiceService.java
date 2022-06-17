@@ -102,7 +102,7 @@ public class InvoiceService {
             int totalPrice = invoiceDetailRepository.getTotalMoneyByInvoiceId(invoice.getId());
             Premiere premiere = premiereRepository.getPremiereById(invoiceDetailList.get(0).getPremiere_id());
             Movies movie = moviesRepository.findById(premiere.getMovie_id());
-            invoiceHistoryList.add(new InvoiceHistory(invoice.getId(), movie.getMovie_name(), movie.getImage_path(), invoice.getCreated_date(), Timestamp.valueOf(premiere.getEnd_time()),totalPrice));
+            invoiceHistoryList.add(new InvoiceHistory(invoice.getId(), movie.getMovie_name(), movie.getImage_path(), invoice.getCreated_date(), premiere.getEnd_time(),totalPrice));
         }
         return invoiceHistoryList;
     }
@@ -116,7 +116,7 @@ public class InvoiceService {
             Movies movies = moviesRepository.findById(premiere.getMovie_id());
             RoomInfo roomInfo = roomRepository.findRoomById(premiere.getRoom_id());
             Cinemas cinema = cinemasRepository.getCinemaByRoomId(premiere.getRoom_id());
-            ticketInfoList.add(new TicketInfo(cinema.getCinema_name(), movies.getMovie_name(), Timestamp.valueOf(premiere.getStart_time()), roomInfo.getRoom_name(), seat_name.getRows_alphabet()+seat_name.getNumber()));
+            ticketInfoList.add(new TicketInfo(cinema.getCinema_name(), movies.getMovie_name(), premiere.getStart_time(), roomInfo.getRoom_name(), seat_name.getRows_alphabet()+seat_name.getNumber()));
         }
 
         return ticketInfoList;

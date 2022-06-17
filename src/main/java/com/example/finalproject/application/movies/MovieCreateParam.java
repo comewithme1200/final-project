@@ -11,14 +11,13 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 public class MovieCreateParam {
+    @DuplicatedMovieNameConstraint
     @NotBlank(message = "Movie name can not be empty")
     private String movie_name;
-    @NotBlank(message = "premiere date can not be empty")
     private Date premiere_date;
     @NotBlank(message = "detail can not be empty")
     private String detail;
     private String trailer_link;
     private String image_path;
-    @NotBlank(message = "time can not be empty")
     private int time;
 }

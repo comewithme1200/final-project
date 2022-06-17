@@ -1,20 +1,23 @@
 package com.example.finalproject.application.premiere;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PremiereCreateParam {
+public class PremiereFullInfo {
+    private String id;
     private Date start_time;
     private Date end_time;
-    @NotBlank(message = "can not be empty")
-    private String movie_id;
-    @NotBlank(message = "can not be empty")
+    private String movie_name;
+    private String room_name;
     private String room_id;
+    private String cinema_name;
+    private String disabled;
 }

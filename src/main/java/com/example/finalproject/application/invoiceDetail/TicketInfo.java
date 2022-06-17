@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 public class TicketInfo {
     private String cinema;
     private String movie_name;
-    private Timestamp start_time;
+    private Date start_time;
     private String room_name;
     private String seat;
 }

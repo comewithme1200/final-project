@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.finalproject.infrastructure.mybatis.mapper.StatisticalMapper">
+    <select id="getMovieTurnover" resultMap="movieTurnover">
+        SELECT sum(id.price) AS turnover, m.movie_name FROM invoice i JOIN invoice_detail id ON i.id = id.invoice_id JOIN premiere p on p.id  = id.premiere_id
+        JOIN movies m ON m.id = p.movie_id
+        GROUP BY m.movie_name
+        ORDER BY turnover DESC
+        LIMIT 10
+    </select>
+
+    <select id="getCinemaTurnover" resultMap="cinemaTurnover">
+        SELECT sum(id.price) AS turnover, c.cinema_name FROM invoice i JOIN invoice_detail id ON i.id = id.invoice_id
+        JOIN premiere p ON p.id  = id.premiere_id JOIN rooms r ON r.id = p.room_id JOIN cinemas c ON c.id = r.cinema_id
+        GROUP BY c.cinema_name
+        ORDER BY turnover desc
+        LIMIT 5
+    </select>
+
+    <select id="getTurnover" resultType="java.lang.Long">
+        SELECT sum(id.price) AS turnover FROM invoice i JOIN invoice_detail id ON i.id = id.invoice_id
+        JOIN premiere p ON p.id  = id.premiere_id JOIN rooms r ON r.id = p.room_id JOIN cinemas c on c.id = r.cinema_id
+    </select>
+
+    <resultMap id="movieTurnover" type="com.example.finalproject.application.statistical.MovieTurnOver" >
+        <result column="movie_name" property="movie_name"/>
+        <result column="turnover" property="turnOver"/>
+    </resultMap>
+
+    <resultMap id="cinemaTurnover" type="com.example.finalproject.application.statistical.CinemaTurnOver" >
+        <result column="cinema_name" property="cinema_name"/>
+        <result column="turnover" property="turnOver"/>
+    </resultMap>
+
+</mapper>

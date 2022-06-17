@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.finalproject.infrastructure.mybatis.mapper.FileMapper">
+    <insert id="insert">
+        insert into files (id, content_type, data, name, size) values(
+        #{file.id},
+        #{file.content_type},
+        #{file.data},
+        #{file.name},
+        #{file.size}
+        )
+    </insert>
+
+    <select id="getCinemaByRoomId" resultMap="cinema">
+        SELECT c.id, c.cinema_name, c.cinema_address FROM cinemas c JOIN rooms r ON c.id = r.cinema_id WHERE r.id = #{room_id}
+    </select>
+
+
+    <resultMap id="cinema" type="com.example.finalproject.core.cinemas.Cinemas" >
+        <id column="id" property="id"/>
+        <result column="cinema_name" property="cinema_name"/>
+        <result column="cinema_address" property="cinema_address"/>
+    </resultMap>
+
+</mapper>

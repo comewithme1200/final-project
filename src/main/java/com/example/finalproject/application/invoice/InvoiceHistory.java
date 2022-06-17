@@ -15,7 +15,7 @@ public class InvoiceHistory {
     private String movie_name;
     private String image_path;
     private Date created_date;
-    private Timestamp premiere_end_time;
+    private Date premiere_end_time;
     private int totalPrice;
 }
 

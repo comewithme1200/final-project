@@ -6,21 +6,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class PremiereInfo {
     private String id;
-    private Timestamp startTime;
+    private Date startTime;
     private String movieId;
     private String roomId;
 
     public static PremiereInfo fromPremiere(Premiere premiere) {
-        Timestamp start_timestamp = Timestamp.valueOf(premiere.getStart_time());
         return new PremiereInfo(
             premiere.getId(),
-            start_timestamp,
+            premiere.getStart_time(),
             premiere.getMovie_id(),
             premiere.getRoom_id()
         );

@@ -9,6 +9,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class MyBatisMovieRepository implements MoviesRepository {
@@ -29,5 +31,20 @@ public class MyBatisMovieRepository implements MoviesRepository {
     @Override
     public Movies findById(String id) {
         return moviesMapper.findById(id);
+    }
+
+    @Override
+    public List<Movies> getAll() {
+        return moviesMapper.getAll();
+    }
+
+    @Override
+    public List<Movies> filter(String query) {
+        return moviesMapper.filter("%" + query + "%");
+    }
+
+    @Override
+    public Optional<Movies> findByName(String name) {
+        return moviesMapper.findByName(name);
     }
 }

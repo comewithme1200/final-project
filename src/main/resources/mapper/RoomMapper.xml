@@ -11,7 +11,7 @@
     </insert>
 
     <select id="getAll" resultMap="roomInfo">
-        SELECT id, room_name, cinema_id FROM rooms
+        SELECT r.id, r.cinema_id, r.room_name, r.room_type, c.cinema_name FROM rooms r JOIN cinemas c on r.cinema_id = c.id
     </select>
 
     <select id="findRoomById" resultMap="roomInfo">

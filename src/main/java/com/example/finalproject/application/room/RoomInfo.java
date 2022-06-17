@@ -11,6 +11,7 @@ public class RoomInfo {
     private String room_name;
     private String cinema_id;
     private String room_type;
+    private String cinema_name;
 
     public RoomInfo(String id, String room_name) {
         this.id = id;

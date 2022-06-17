@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface MoviesMapper {
@@ -13,4 +15,10 @@ public interface MoviesMapper {
     ArrayList<Movies> getMovies();
 
     Movies findById(@Param("id") String id);
+
+    List<Movies> getAll();
+
+    List<Movies> filter(@Param("query") String query);
+
+    Optional<Movies> findByName(@Param("name") String name);
 }

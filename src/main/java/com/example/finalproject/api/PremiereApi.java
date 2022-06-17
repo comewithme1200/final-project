@@ -1,5 +1,7 @@
 package com.example.finalproject.api;
 
+import com.example.finalproject.api.exception.InvalidAuthenticationException;
+import com.example.finalproject.api.exception.InvalidPremiereException;
 import com.example.finalproject.application.premiere.*;
 import com.example.finalproject.core.premiere.Premiere;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,7 @@ public class PremiereApi {
     PremiereService premiereService;
 
     @PostMapping(path = "/create")
-    public PremiereInfo createPremiere(@RequestBody PremiereCreateParam premiereCreateParam) {
+    public PremiereInfo createPremiere(@RequestBody PremiereCreateParam premiereCreateParam) throws InvalidPremiereException {
         return premiereService.create(premiereCreateParam);
     }
 
@@ -29,5 +31,10 @@ public class PremiereApi {
     @GetMapping("/movie")
     public List<GetPremiereResponse> getPremiereOfMovie(@RequestParam String movie_id, @RequestParam String date) {
         return premiereService.getPremiereMovie(movie_id, date);
+    }
+
+    @GetMapping("/getInfo")
+    public List<PremiereFullInfo> getInfo() {
+        return premiereService.getInfo();
     }
 }
