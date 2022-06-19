@@ -4,16 +4,20 @@ package com.example.finalproject.infrastructure.repository;
 import com.example.finalproject.core.user.User;
 import com.example.finalproject.core.user.UserRepository;
 import com.example.finalproject.infrastructure.mybatis.mapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public class MyBatisUserRepository implements UserRepository {
 
-    @Autowired
+    final
     UserMapper userMapper;
+
+    public MyBatisUserRepository(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 
     @Override
     public void save(User user) {
@@ -47,5 +51,10 @@ public class MyBatisUserRepository implements UserRepository {
     @Override
     public void updateLevel(String level, String user_id) {
         userMapper.updateLevel(level, user_id);
+    }
+
+    @Override
+    public List<User> getAdmin() {
+        return userMapper.getAdmin();
     }
 }

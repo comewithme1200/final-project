@@ -47,4 +47,14 @@ public class MyBatisMovieRepository implements MoviesRepository {
     public Optional<Movies> findByName(String name) {
         return moviesMapper.findByName(name);
     }
+
+    @Override
+    public void update(Movies movies, String id) {
+        moviesMapper.update(movies, id);
+    }
+
+    @Override
+    public void delete(String id) {
+        moviesMapper.delete(id);
+    }
 }

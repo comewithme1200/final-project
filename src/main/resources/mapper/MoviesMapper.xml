@@ -13,6 +13,10 @@
         )
     </insert>
 
+    <delete id="delete">
+       DELETE from movies WHERE ID = #{id};
+    </delete>
+
     <select id="getMovies" resultMap="movies">
         select * from movies
     </select>
@@ -42,5 +46,6 @@
         <result column="image_path" property="image_path"/>
         <result column="duration" property="time"/>
         <result column="image_id" property="image_id"/>
+        <result column="time" property="time"/>
     </resultMap>
 </mapper>

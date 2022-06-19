@@ -18,4 +18,8 @@ public interface MoviesRepository {
     List<Movies> filter(String query);
 
     Optional<Movies> findByName(String name);
+
+    void update(Movies movies, String id);
+
+    void delete(String id);
 }

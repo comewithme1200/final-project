@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,7 +21,8 @@ public class PremiereService {
         List<PremiereFullInfo> premiereFullInfos = premiereRepository.getInfo();
         for (PremiereFullInfo premiereFullInfo : premiereFullInfos) {
             if (premiereFullInfo.getStart_time().compareTo(premiereCreateParam.getEnd_time()) < 0  && premiereCreateParam.getStart_time().compareTo(premiereFullInfo.getEnd_time()) < 0
-            && premiereFullInfo.getRoom_id().equals(premiereCreateParam.getRoom_id())) {
+            && premiereFullInfo.getRoom_id().equals(premiereCreateParam.getRoom_id()) || premiereCreateParam.getStart_time().compareTo(new Date()) < 0
+            || premiereCreateParam.getStart_time().compareTo(premiereCreateParam.getEnd_time()) >= 0) {
                 throw new InvalidPremiereException();
             }
         }

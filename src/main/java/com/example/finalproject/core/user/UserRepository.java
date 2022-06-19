@@ -1,5 +1,6 @@
 package com.example.finalproject.core.user;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository {
@@ -12,4 +13,6 @@ public interface UserRepository {
      Optional<User> findByEmail(String email);
 
      void updateLevel(String level, String user_id);
+
+     List<User> getAdmin();
 }

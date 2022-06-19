@@ -1,5 +1,6 @@
 package com.example.finalproject.application.movies;
 
+import com.example.finalproject.api.exception.NotFoundException;
 import com.example.finalproject.application.files.FileEntity;
 import com.example.finalproject.core.file.FileRepository;
 import com.example.finalproject.core.movies.Movies;
@@ -11,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -39,8 +39,45 @@ public class MovieService {
         return movies;
     }
 
+    public Movies update(MovieCreateParam movieCreateParam, MultipartFile file, String id) throws NotFoundException, IOException {
+        Movies movie = moviesRepository.findById(id);
+        String fileId = UUID.randomUUID().toString();
+        if (movie != null) {
+            Optional<FileEntity> image = fileRepository.findById(movie.getImage_id());
+            FileEntity newFile;
+            Movies movies;
+            if (image.isPresent()) {
+                newFile = new FileEntity(movie.getImage_id(),
+                        StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename())), file.getContentType(), file.getSize(), file.getBytes());
+                movies = new Movies(movieCreateParam.getMovie_name() != null ? movieCreateParam.getMovie_name() : ""
+                        , movieCreateParam.getPremiere_date() != null ? movieCreateParam.getPremiere_date() : new Date()
+                        , movieCreateParam.getDetail() != null ? movieCreateParam.getDetail() : ""
+                        , movieCreateParam.getTrailer_link() != null ? movieCreateParam.getTrailer_link() : ""
+                        , movieCreateParam.getImage_path() != null ? movieCreateParam.getImage_path() : ""
+                        , movieCreateParam.getTime()
+                        , movie.getImage_id());
+            } else {
+                newFile = new FileEntity(fileId,
+                        StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename())), file.getContentType(), file.getSize(), file.getBytes());
+                movies = new Movies(movieCreateParam.getMovie_name() != null ? movieCreateParam.getMovie_name() : ""
+                        , movieCreateParam.getPremiere_date() != null ? movieCreateParam.getPremiere_date() : new Date()
+                        , movieCreateParam.getDetail() != null ? movieCreateParam.getDetail() : ""
+                        , movieCreateParam.getTrailer_link() != null ? movieCreateParam.getTrailer_link() : ""
+                        , movieCreateParam.getImage_path() != null ? movieCreateParam.getImage_path() : ""
+                        , movieCreateParam.getTime()
+                        , fileId);
+            }
+            fileRepository.save(newFile);
+            moviesRepository.update(movies, id);
+        } else {
+            throw new NotFoundException("Phim không tồn tại");
+        }
+        Movies result = moviesRepository.findById(id);
+        return result;
+    }
+
     public byte[] getImage(String id) {
-        return fileRepository.findById(id).get().getData(); // ty validate cho nay di
+        return fileRepository.findById(id).get().getData();
     }
 
 
@@ -83,5 +120,9 @@ public class MovieService {
 
     public List<Movies> filter(String query) {
         return moviesRepository.filter(query);
+    }
+
+    public void delete(String id) {
+        moviesRepository.delete(id);
     }
 }

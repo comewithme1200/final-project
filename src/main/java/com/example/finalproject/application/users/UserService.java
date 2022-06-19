@@ -41,6 +41,7 @@ public class UserService {
                 userRegisterParam.getEmail(),
                 encryptSerivce.encryptPassword(userRegisterParam.getPassword()),
                 userRegisterParam.getName(),
+                "bronze",
                 userRegisterParam.getPhoneNumber(),
                 userRegisterParam.getDob(),
                 userRegisterParam.getAddress()
@@ -49,8 +50,31 @@ public class UserService {
         return UserData.fromUser(user);
     }
 
+    public UserData createAdmin(@Valid UserRegisterParam userRegisterParam) {
+        User user = new User(
+                userRegisterParam.getEmail(),
+                encryptSerivce.encryptPassword(userRegisterParam.getPassword()),
+                userRegisterParam.getName(),
+                "",
+                userRegisterParam.getPhoneNumber(),
+                userRegisterParam.getDob(),
+                userRegisterParam.getAddress(),
+                "ad"
+        );
+        userRepository.save(user);
+        return UserData.fromUser(user);
+    }
+
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public Optional<User> findById(String id) {
+        return userRepository.findById(id);
+    }
+
+    public List<User> getAdmin() {
+        return userRepository.getAdmin();
     }
 
     public Optional<User> updateLevel(User user) {
@@ -77,5 +101,4 @@ public class UserService {
 
         return userRepository.findById(user.getId());
     }
-
 }

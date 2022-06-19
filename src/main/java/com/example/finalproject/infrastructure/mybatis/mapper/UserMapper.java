@@ -4,6 +4,7 @@ import com.example.finalproject.core.user.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 @Mapper
@@ -17,4 +18,6 @@ public interface UserMapper {
     User findByEmail(@Param("email") String email);
 
     void updateLevel(@Param("level") String level, @Param("user_id") String user_id);
+
+    List<User> getAdmin();
 }

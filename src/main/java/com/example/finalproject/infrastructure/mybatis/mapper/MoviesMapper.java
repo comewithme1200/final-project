@@ -21,4 +21,8 @@ public interface MoviesMapper {
     List<Movies> filter(@Param("query") String query);
 
     Optional<Movies> findByName(@Param("name") String name);
+
+    void update(@Param("movie") Movies movies, @Param("id") String id);
+
+    void delete(@Param("id") String id);
 }

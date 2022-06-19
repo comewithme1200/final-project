@@ -10,6 +10,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -38,9 +39,24 @@ public class UserApi {
         return userService.createUser(registerParam);
     }
 
+    @PostMapping("/registerAdmin")
+    public UserData createAdmin(@Valid @RequestBody UserRegisterParam registerParam) {
+        return userService.createAdmin(registerParam);
+    }
+
     @GetMapping
     public User getUserByToken(@AuthenticationPrincipal User user) {
         return user;
+    }
+
+    @GetMapping("/getUserById")
+    public Optional<User> getUserById(@RequestParam String id) {
+        return userService.findById(id);
+    }
+
+    @GetMapping("/getAdmin")
+    public List<User> getAdmin() {
+        return userService.getAdmin();
     }
 
     @PostMapping(path = "/login")
