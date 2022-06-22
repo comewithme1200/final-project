@@ -77,6 +77,10 @@ public class UserService {
         return userRepository.getAdmin();
     }
 
+    public void update(UpdateParam updateParam, String id) {
+        userRepository.update(updateParam, id);
+    }
+
     public Optional<User> updateLevel(User user) {
         List<Invoice> invoiceList = invoiceRepository.getInvoiceByUser(user.getId());
         int sum = 0;
@@ -100,5 +104,9 @@ public class UserService {
         userRepository.updateLevel(level, user.getId());
 
         return userRepository.findById(user.getId());
+    }
+
+    public List<User> filter(String query) {
+        return userRepository.filter(query);
     }
 }

@@ -102,6 +102,11 @@ public class InvoiceService {
             int totalPrice = invoiceDetailRepository.getTotalMoneyByInvoiceId(invoice.getId());
             Premiere premiere = premiereRepository.getPremiereById(invoiceDetailList.get(0).getPremiere_id());
             Movies movie = moviesRepository.findById(premiere.getMovie_id());
+            if (movie.getImage_id() != null) {
+                movie.setImage_path("http://localhost:8080/movies/file/" + movie.getImage_id());
+            } else {
+                movie.setImage_path("http://localhost:8080/movies/file/1a981425-6a4a-47e2-890b-61bcaae870a8");
+            }
             invoiceHistoryList.add(new InvoiceHistory(invoice.getId(), movie.getMovie_name(), movie.getImage_path(), invoice.getCreated_date(), premiere.getEnd_time(),totalPrice));
         }
         return invoiceHistoryList;

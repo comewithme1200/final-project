@@ -18,6 +18,7 @@ public class PremiereFullInfo {
     private String movie_name;
     private String room_name;
     private String room_id;
+    private String movie_id;
     private String cinema_name;
     private String disabled;
 }

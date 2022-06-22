@@ -19,4 +19,8 @@ public interface PremiereRepository {
     void autoUpdatePremiere();
 
     List<PremiereFullInfo> getInfo();
+
+    PremiereFullInfo getById(String id);
+
+    void delete(String id);
 }

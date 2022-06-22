@@ -23,4 +23,12 @@ public class Premiere {
         this.room_id = room_id;
     }
 
+    public Premiere(String id, Date start_time, Date end_time, String movie_id, String room_id) {
+        this.id = id;
+        this.start_time = start_time;
+        this.end_time = end_time;
+        this.movie_id = movie_id;
+        this.room_id = room_id;
+    }
+
 }

@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -41,39 +42,50 @@ public class MovieService {
 
     public Movies update(MovieCreateParam movieCreateParam, MultipartFile file, String id) throws NotFoundException, IOException {
         Movies movie = moviesRepository.findById(id);
-        String fileId = UUID.randomUUID().toString();
         if (movie != null) {
-            Optional<FileEntity> image = fileRepository.findById(movie.getImage_id());
-            FileEntity newFile;
-            Movies movies;
-            if (image.isPresent()) {
-                newFile = new FileEntity(movie.getImage_id(),
-                        StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename())), file.getContentType(), file.getSize(), file.getBytes());
-                movies = new Movies(movieCreateParam.getMovie_name() != null ? movieCreateParam.getMovie_name() : ""
-                        , movieCreateParam.getPremiere_date() != null ? movieCreateParam.getPremiere_date() : new Date()
-                        , movieCreateParam.getDetail() != null ? movieCreateParam.getDetail() : ""
-                        , movieCreateParam.getTrailer_link() != null ? movieCreateParam.getTrailer_link() : ""
-                        , movieCreateParam.getImage_path() != null ? movieCreateParam.getImage_path() : ""
-                        , movieCreateParam.getTime()
-                        , movie.getImage_id());
+            String fileId = "";
+            if (!Objects.equals(file.getOriginalFilename(), "")) {
+                fileId = UUID.randomUUID().toString();
+                FileEntity deleteFile = new FileEntity(movie.getImage_id(), StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename())), file.getContentType(), file.getSize(), file.getBytes());
+                fileRepository.delete(deleteFile);
+                FileEntity newFile = new FileEntity(fileId, StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename())), file.getContentType(), file.getSize(), file.getBytes());
+                fileRepository.save(newFile);
             } else {
-                newFile = new FileEntity(fileId,
-                        StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename())), file.getContentType(), file.getSize(), file.getBytes());
-                movies = new Movies(movieCreateParam.getMovie_name() != null ? movieCreateParam.getMovie_name() : ""
-                        , movieCreateParam.getPremiere_date() != null ? movieCreateParam.getPremiere_date() : new Date()
-                        , movieCreateParam.getDetail() != null ? movieCreateParam.getDetail() : ""
-                        , movieCreateParam.getTrailer_link() != null ? movieCreateParam.getTrailer_link() : ""
-                        , movieCreateParam.getImage_path() != null ? movieCreateParam.getImage_path() : ""
-                        , movieCreateParam.getTime()
-                        , fileId);
+                fileId = movie.getImage_id();
             }
-            fileRepository.save(newFile);
-            moviesRepository.update(movies, id);
+            Movies movies = new Movies(id
+                    , movieCreateParam.getMovie_name()
+                    , movieCreateParam.getPremiere_date()
+                    , movieCreateParam.getDetail()
+                    , movieCreateParam.getTrailer_link()
+                    , movieCreateParam.getImage_path()
+                    , movieCreateParam.getTime(),
+                    fileId);
+            moviesRepository.delete(movie.getId());
+            moviesRepository.save(movies);
         } else {
             throw new NotFoundException("Phim không tồn tại");
         }
-        Movies result = moviesRepository.findById(id);
-        return result;
+        return moviesRepository.findById(id);
+    }
+
+    public Movies updateWithoutFile(MovieCreateParam movieCreateParam, String id) throws NotFoundException {
+        Movies movie = moviesRepository.findById(id);
+        if (movie != null) {
+            Movies movies = new Movies(id
+                    , movieCreateParam.getMovie_name()
+                    , movieCreateParam.getPremiere_date()
+                    , movieCreateParam.getDetail()
+                    , movieCreateParam.getTrailer_link()
+                    , movieCreateParam.getImage_path()
+                    , movieCreateParam.getTime(),
+                    movie.getImage_id());
+            moviesRepository.delete(movie.getId());
+            moviesRepository.save(movies);
+        } else {
+            throw new NotFoundException("Phim không tồn tại");
+        }
+        return moviesRepository.findById(id);
     }
 
     public byte[] getImage(String id) {
@@ -95,6 +107,22 @@ public class MovieService {
                 moviesAboutOnAir.add(movies);
             }
         }
+        for (Movies movie : moviesAboutOnAir) {
+            if (movie.getImage_id() != null) {
+                movie.setImage_path("http://localhost:8080/movies/file/" + movie.getImage_id());
+            } else {
+                movie.setImage_path("http://localhost:8080/movies/file/1a981425-6a4a-47e2-890b-61bcaae870a8");
+            }
+        }
+
+        for (Movies movie : moviesOnAir) {
+            if (movie.getImage_id() != null) {
+                movie.setImage_path("http://localhost:8080/movies/file/" + movie.getImage_id());
+            } else {
+                movie.setImage_path("http://localhost:8080/movies/file/1a981425-6a4a-47e2-890b-61bcaae870a8");
+            }
+        }
+
 
         MoviesList moviesList = new MoviesList(moviesAboutOnAir, moviesOnAir);
 
@@ -102,7 +130,13 @@ public class MovieService {
     }
 
     public Movies getMovieById(String id) {
-        return moviesRepository.findById(id);
+        Movies movie = moviesRepository.findById(id);
+        if (movie.getImage_id() != null) {
+            movie.setImage_path("http://localhost:8080/movies/file/" + movie.getImage_id());
+        } else {
+            movie.setImage_path("http://localhost:8080/movies/file/1a981425-6a4a-47e2-890b-61bcaae870a8");
+        }
+        return movie;
     }
 
     public List<Movies> getAll() {
@@ -111,9 +145,8 @@ public class MovieService {
             if (movie.getImage_id() != null) {
                 movie.setImage_path("http://localhost:8080/movies/file/" + movie.getImage_id());
             } else {
-                movie.setImage_path("http://localhost:8080/movies/file/bc292d22-6045-4315-b50a-9c4a4ce8dead");
+                movie.setImage_path("http://localhost:8080/movies/file/1a981425-6a4a-47e2-890b-61bcaae870a8");
             }
-
         }
         return moviesList;
     }

@@ -18,6 +18,14 @@ public class RoomInfo {
         this.room_name = room_name;
     }
 
+    public RoomInfo(String id, String room_name, String cinema_id, String room_type) {
+        this.id = id;
+        this.room_name = room_name;
+        this.cinema_id = cinema_id;
+        this.room_type = room_type;
+    }
+
+
     public static RoomInfo fromRoom(Room room) {
         return new RoomInfo(
                 room.getId(),

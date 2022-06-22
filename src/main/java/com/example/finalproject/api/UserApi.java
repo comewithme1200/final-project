@@ -73,9 +73,24 @@ public class UserApi {
         }
     }
 
+    @PutMapping()
+    public Optional<User> update(@RequestBody UpdateParam updateParam, @RequestParam("id") String id) throws InvalidAuthenticationException {
+        Optional<User> user = userService.findByEmail(updateParam.getEmail());
+        if (user.isPresent()) {
+            userService.update(updateParam, id);
+            return userService.findByEmail(updateParam.getEmail());
+        }
+        throw new InvalidAuthenticationException();
+    }
+
     @PutMapping(path = "/updateLevel")
     public Optional<User> updateLevel(@AuthenticationPrincipal User user) {
         return userService.updateLevel(user);
+    }
+
+    @GetMapping("/filter")
+    public List<User> filter(@RequestParam String query) {
+        return userService.filter(query);
     }
 
 }

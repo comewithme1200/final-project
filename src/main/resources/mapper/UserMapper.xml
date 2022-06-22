@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.finalproject.infrastructure.mybatis.mapper.UserMapper">
   <insert id="insert">
-    insert into users (id, email, password, name, level_id, phone_number, dob, address, role)
+    insert into users (id, email, password, name, level, phone_number, dob, address, role)
     values(
     #{user.id},
     #{user.email},
@@ -18,6 +18,20 @@
   <update id="updateLevel">
     update users set level = #{level} where id = #{user_id}
   </update>
+  <update id="update">
+    update users
+    <set>
+      <if test="user.name != ''">name = #{user.name},</if>
+      <if test="user.email != ''">email = #{user.email},</if>
+      <if test="user.address != ''">address = #{user.address},</if>
+      <if test="user.phoneNumber != ''">phone_number = #{user.phoneNumber},</if>
+      <if test="user.dob != null">dob = #{user.dob}</if>
+    </set>
+    where id = #{id}
+  </update>
+  <select id="filter" resultMap="user">
+    select * from users u where u.email ILIKE #{query} or u.name ILIKE #{query} or u.phone_number ILIKE #{query}
+  </select>
   <select id="getAdmin" resultMap="user">
     select * from users where role = 'ad'
   </select>
@@ -39,6 +53,7 @@
     <result column="phone_number" property="phoneNumber"/>
     <result column="dob" property="dob"/>
     <result column="address" property="address"/>
+    <result column="role" property="role"/>
   </resultMap>
 
 </mapper>

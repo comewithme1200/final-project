@@ -33,8 +33,18 @@ public class PremiereApi {
         return premiereService.getPremiereMovie(movie_id, date);
     }
 
+    @PutMapping
+    public PremiereInfo updatePremiere(@RequestBody PremiereCreateParam premiereCreateParam, @RequestParam String id) throws InvalidPremiereException {
+        return premiereService.update(premiereCreateParam, id);
+    }
+
     @GetMapping("/getInfo")
     public List<PremiereFullInfo> getInfo() {
         return premiereService.getInfo();
+    }
+
+    @GetMapping("/getById")
+    public PremiereFullInfo getById(@RequestParam String id) {
+        return premiereService.getById(id);
     }
 }

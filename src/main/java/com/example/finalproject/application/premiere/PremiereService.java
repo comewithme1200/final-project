@@ -32,6 +32,23 @@ public class PremiereService {
         return PremiereInfo.fromPremiere(premiere);
     }
 
+    public PremiereInfo update(PremiereCreateParam premiereCreateParam, String id) throws InvalidPremiereException {
+        premiereRepository.delete(id);
+        List<PremiereFullInfo> premiereFullInfos = premiereRepository.getInfo();
+        for (PremiereFullInfo premiereFullInfo : premiereFullInfos) {
+            if (premiereFullInfo.getStart_time().compareTo(premiereCreateParam.getEnd_time()) < 0  && premiereCreateParam.getStart_time().compareTo(premiereFullInfo.getEnd_time()) < 0
+                    && premiereFullInfo.getRoom_id().equals(premiereCreateParam.getRoom_id()) || premiereCreateParam.getStart_time().compareTo(new Date()) < 0
+                    || premiereCreateParam.getStart_time().compareTo(premiereCreateParam.getEnd_time()) >= 0) {
+                throw new InvalidPremiereException();
+            }
+        }
+
+        Premiere premiere = new Premiere(id, premiereCreateParam.getStart_time(), premiereCreateParam.getEnd_time(),
+                premiereCreateParam.getMovie_id(), premiereCreateParam.getRoom_id());
+        premiereRepository.save(premiere);
+        return PremiereInfo.fromPremiere(premiere);
+    }
+
     public ArrayList<Premiere> getAll() {
         return premiereRepository.getAll();
     }
@@ -42,5 +59,9 @@ public class PremiereService {
 
     public List<PremiereFullInfo> getInfo() {
         return premiereRepository.getInfo();
+    }
+
+    public PremiereFullInfo getById(String id) {
+        return premiereRepository.getById(id);
     }
 }

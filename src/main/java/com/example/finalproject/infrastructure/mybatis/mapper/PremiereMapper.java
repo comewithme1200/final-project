@@ -24,4 +24,8 @@ public interface PremiereMapper {
     void autoUpdatePremiere();
 
     List<PremiereFullInfo> getInfo();
+
+    PremiereFullInfo getById(@Param("id") String id);
+
+    void delete(@Param("id") String id);
 }

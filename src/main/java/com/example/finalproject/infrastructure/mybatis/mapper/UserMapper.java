@@ -1,5 +1,6 @@
 package com.example.finalproject.infrastructure.mybatis.mapper;
 
+import com.example.finalproject.application.users.UpdateParam;
 import com.example.finalproject.core.user.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -20,4 +21,8 @@ public interface UserMapper {
     void updateLevel(@Param("level") String level, @Param("user_id") String user_id);
 
     List<User> getAdmin();
+
+    void update(@Param("user") UpdateParam updateParam, @Param("id") String id);
+
+    List<User> filter(@Param("query") String query);
 }

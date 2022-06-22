@@ -48,4 +48,14 @@ public class MyBatisPremiereRepository implements PremiereRepository {
         return premiereMapper.getInfo();
     }
 
+    @Override
+    public PremiereFullInfo getById(String id) {
+        return premiereMapper.getById(id);
+    }
+
+    @Override
+    public void delete(String id) {
+        premiereMapper.delete(id);
+    }
+
 }

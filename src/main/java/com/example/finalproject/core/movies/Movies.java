@@ -31,4 +31,15 @@ public class Movies {
         this.image_id = image_id;
     }
 
+    public Movies(String id, String movie_name, Date premiere_date, String detail, String trailer_link, String image_path, int time, String image_id) {
+        this.id = id;
+        this.movie_name = movie_name;
+        this.premiere_date = premiere_date;
+        this.detail = detail;
+        this.trailer_link = trailer_link;
+        this.image_path = image_path;
+        this.time = time;
+        this.image_id = image_id;
+    }
+
 }

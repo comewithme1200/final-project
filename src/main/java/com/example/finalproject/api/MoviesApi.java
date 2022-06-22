@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -44,8 +45,13 @@ public class MoviesApi {
     }
 
     @PutMapping()
-    public Movies update(@Valid @RequestPart MovieCreateParam movieCreateParam, @RequestPart("file") MultipartFile file, @RequestParam String id) throws IOException, NotFoundException {
+    public Movies update(@RequestPart("movie") MovieCreateParam movieCreateParam, @RequestPart("file") MultipartFile file, @RequestParam("id") String id) throws IOException, NotFoundException {
         return movieService.update(movieCreateParam, file, id);
+    }
+
+    @PutMapping("/withoutFile")
+    public Movies update(@RequestBody MovieCreateParam movieCreateParam, @RequestParam("id") String id) throws NotFoundException {
+        return movieService.updateWithoutFile(movieCreateParam, id);
     }
 
     @DeleteMapping()

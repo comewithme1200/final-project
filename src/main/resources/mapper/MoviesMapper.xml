@@ -2,16 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.finalproject.infrastructure.mybatis.mapper.MoviesMapper">
     <insert id="insert">
-        insert into movies (id, movie_name, premiere_date, detail, trailer_link, image_path, image_id) values(
+        insert into movies (id, movie_name, premiere_date, detail, trailer_link, image_path, image_id, duration) values(
         #{movie.id},
         #{movie.movie_name},
         #{movie.premiere_date},
         #{movie.detail},
         #{movie.trailer_link},
         #{movie.image_path},
-        #{movie.image_id}
+        #{movie.image_id},
+        #{movie.time}
         )
     </insert>
+
+    <update id="update">
+
+    </update>
 
     <delete id="delete">
        DELETE from movies WHERE ID = #{id};
