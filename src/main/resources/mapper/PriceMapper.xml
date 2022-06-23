@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.finalproject.infrastructure.mybatis.mapper.PriceMapper">
+    <insert id="create">
+        insert into price (id, name, detail, amount) values(
+        #{price.id},
+        #{price.name},
+        #{price.detail},
+        #{price.amount}
+        )
+    </insert>
+
+    <select id="getWeekendPrice" resultType="java.lang.Long">
+        SELECT r.amount FROM price r where r.name = 'Cuối tuần'
+    </select>
+
+    <select id="getStandardPrice" resultType="java.lang.Long">
+        SELECT r.amount FROM price r where r.name = 'Ghế thường'
+    </select>
+
+    <select id="getVipPrice" resultType="java.lang.Long">
+        SELECT r.amount FROM price r where r.name = 'Ghế vip'
+    </select>
+
+    <select id="getTimePrice" resultMap="price">
+        SELECT * FROM price r where r.name = 'Giờ vàng'
+    </select>
+
+    <select id="getRoomPrice" resultType="java.lang.Long">
+        SELECT r.amount FROM price r where r.name = 'Phòng vip'
+    </select>
+
+    <select id="getAmountByName" resultType="java.lang.Long">
+        SELECT r.amount FROM price r where r.name = #{name}
+    </select>
+
+    <resultMap id="price" type="com.example.finalproject.core.price.Price">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="detail" property="detail"/>
+        <result column="amount" property="amount"/>
+    </resultMap>
+
+</mapper>
